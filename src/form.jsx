@@ -8,7 +8,7 @@ import { EventEmitter } from 'fbemitter';
 import { injectIntl } from 'react-intl';
 import FormValidator from './form-validator';
 import FormElements from './form-elements';
-import { TwoColumnRow, ThreeColumnRow, FourColumnRow } from './multi-column';
+import { TwoColumnRow, ThreeColumnRow, MultiColumnRow } from './multi-column';
 import CustomElement from './form-elements/custom-element';
 import Registry from './stores/registry';
 
@@ -76,7 +76,7 @@ class ReactForm extends React.Component {
     } else if (item.element === 'DatePicker') {
       $item.value = ref.state.value;
     } else if (item.element === 'Camera') {
-      $item.value = ref.state.img ? ref.state.img.replace('data:image/png;base64,', '') : '';
+      $item.value = ref.state.img;
     } else if (item.element === 'FileUpload') {
       $item.value = ref.state.fileUpload;
     } else if (ref && ref.inputField && ref.inputField.current) {
@@ -248,6 +248,21 @@ class ReactForm extends React.Component {
         }
       }
 
+      if (item.element === 'PhoneNumber') {
+        const ref = this.inputs[item.field_name];
+        const phoneValue = this._getItemValue(item, ref).value;
+        if (phoneValue) {
+          const validatePhone = (phone) => phone.match(
+            // eslint-disable-next-line no-useless-escape
+            /^[+]?(1\-|1\s|1|\d{3}\-|\d{3}\s|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/g
+          );
+          const checkPhone = validatePhone(phoneValue);
+          if (!checkPhone) {
+            errors.push(`${item.label} ${intl.formatMessage({ id: 'message.invalid-phone-number' })}`);
+          }
+        }
+      }
+
       if (this.props.validateForCorrectness && this._isIncorrect(item)) {
         errors.push(`${item.label} ${intl.formatMessage({ id: 'message.was-answered-incorrectly' })}!`);
       }
@@ -346,6 +361,7 @@ class ReactForm extends React.Component {
       switch (item.element) {
         case 'TextInput':
         case 'EmailInput':
+        case 'PhoneNumber':
         case 'NumberInput':
         case 'TextArea':
         case 'Dropdown':
@@ -357,8 +373,8 @@ class ReactForm extends React.Component {
           return this.getInputElement(item);
         case 'CustomElement':
           return this.getCustomElement(item);
-        case 'FourColumnRow':
-          return this.getContainerElement(item, FourColumnRow);
+        case 'MultiColumnRow':
+          return this.getContainerElement(item, MultiColumnRow);
         case 'ThreeColumnRow':
           return this.getContainerElement(item, ThreeColumnRow);
         case 'TwoColumnRow':

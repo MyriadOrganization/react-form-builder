@@ -192,6 +192,41 @@ class EmailInput extends React.Component {
   }
 }
 
+class PhoneNumber extends React.Component {
+  constructor(props) {
+    super(props);
+    this.inputField = React.createRef();
+  }
+
+  render() {
+    const props = {};
+    props.type = 'tel';
+    props.className = 'form-control';
+    props.name = this.props.data.field_name;
+    if (this.props.mutable) {
+      props.defaultValue = this.props.defaultValue;
+      props.ref = this.inputField;
+    }
+
+    let baseClasses = 'SortableItem rfb-item';
+    if (this.props.data.pageBreakBefore) { baseClasses += ' alwaysbreak'; }
+
+    if (this.props.read_only) {
+      props.disabled = 'disabled';
+    }
+
+    return (
+      <div style={{ ...this.props.style }} className={baseClasses}>
+        <ComponentHeader {...this.props} />
+        <div className="form-group">
+          <ComponentLabel {...this.props} />
+          <input {...props} />
+        </div>
+      </div>
+    );
+  }
+}
+
 class NumberInput extends React.Component {
   constructor(props) {
     super(props);
@@ -686,34 +721,39 @@ class Download extends React.Component {
 class Camera extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { img: null };
+    this.state = { img: null, previewImg: null };
   }
 
   displayImage = (e) => {
     const self = this;
     const target = e.target;
+
     let file;
     let reader;
-
     if (target.files && target.files.length) {
-      file = target.files[0];
-      // eslint-disable-next-line no-undef
-      reader = new FileReader();
-      reader.readAsDataURL(file);
-
-      reader.onloadend = () => {
-        self.setState({
-          img: reader.result,
-        });
-      };
+      self.setState({ img: target.files[0], previewImg: URL.createObjectURL(target.files[0]) });
     }
   };
 
   clearImage = () => {
     this.setState({
       img: null,
+      previewImg: null,
     });
   };
+
+  getImageSizeProps({ width, height }) {
+    const imgProps = { width: '100%' };
+    if (width) {
+      imgProps.width = width < window.innerWidth
+      ? width
+      : 0.9 * window.innerWidth;
+    }
+    if (height) {
+      imgProps.height = height;
+    }
+    return imgProps;
+  }
 
   render() {
     const imageStyle = {
@@ -757,6 +797,7 @@ class Camera extends React.Component {
                     : 0.9 * window.innerWidth
                 }
                 height={this.props.data.height || "auto"}
+                {...this.getImageSizeProps(this.props.data)}
               />
             </div>
           ) : (
@@ -781,7 +822,8 @@ class Camera extends React.Component {
               {this.state.img && (
                 <div>
                   <img
-                    src={this.state.img}
+                    onLoad={() => URL.revokeObjectURL(this.state.previewImg)}
+                    src={this.state.previewImg}
                     height="100"
                     className="image-upload-preview"
                   />
@@ -969,6 +1011,7 @@ class Range extends React.Component {
       i <= parseInt(props.max_value, 10);
       i += parseInt(props.step, 10)
     ) {
+    for (let i = parseInt(props.min, 10); i <= parseInt(props.max, 10); i += parseInt(props.step, 10)) {
       datalist.push(i);
     }
 
@@ -996,6 +1039,12 @@ class Range extends React.Component {
     if (this.props.data.pageBreakBefore) {
       baseClasses += " alwaysbreak";
     }
+    if (this.props.read_only) {
+      props.disabled = 'disabled';
+    }
+    
+    let baseClasses = 'SortableItem rfb-item';
+    if (this.props.data.pageBreakBefore) { baseClasses += ' alwaysbreak'; }
 
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
@@ -1024,6 +1073,7 @@ FormElements.Label = Label;
 FormElements.LineBreak = LineBreak;
 FormElements.TextInput = TextInput;
 FormElements.EmailInput = EmailInput;
+FormElements.PhoneNumber = PhoneNumber;
 FormElements.NumberInput = NumberInput;
 FormElements.TextArea = TextArea;
 FormElements.Dropdown = Dropdown;

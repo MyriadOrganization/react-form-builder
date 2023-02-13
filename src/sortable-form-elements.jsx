@@ -1,11 +1,11 @@
 import SortableElement from './sortable-element';
 import PlaceHolder from './form-place-holder';
 import BaseFormElements from './form-elements';
-import { TwoColumnRow, ThreeColumnRow, FourColumnRow } from './multi-column';
+import { TwoColumnRow, ThreeColumnRow, MultiColumnRow } from './multi-column';
 import CustomElement from './form-elements/custom-element';
 
 const {
-  Header, Paragraph, Label, LineBreak, TextInput, EmailInput, NumberInput, TextArea, Dropdown, Checkboxes,
+  Header, Paragraph, Label, LineBreak, TextInput, EmailInput, PhoneNumber, NumberInput, TextArea, Dropdown, Checkboxes,
   DatePicker, RadioButtons, Image, Rating, Tags, Signature, HyperLink, Download, Camera, Range, FileUpload,
 } = BaseFormElements;
 
@@ -17,6 +17,7 @@ FormElements.Label = SortableElement(Label);
 FormElements.LineBreak = SortableElement(LineBreak);
 FormElements.TextInput = SortableElement(TextInput);
 FormElements.EmailInput = SortableElement(EmailInput);
+FormElements.PhoneNumber = SortableElement(PhoneNumber);
 FormElements.NumberInput = SortableElement(NumberInput);
 FormElements.TextArea = SortableElement(TextArea);
 FormElements.Dropdown = SortableElement(Dropdown);
@@ -35,7 +36,7 @@ FormElements.Range = SortableElement(Range);
 FormElements.PlaceHolder = SortableElement(PlaceHolder);
 FormElements.TwoColumnRow = SortableElement(TwoColumnRow);
 FormElements.ThreeColumnRow = SortableElement(ThreeColumnRow);
-FormElements.FourColumnRow = SortableElement(FourColumnRow);
+FormElements.MultiColumnRow = SortableElement(MultiColumnRow);
 FormElements.CustomElement = SortableElement(CustomElement);
 
 export default FormElements;

@@ -17,7 +17,7 @@ type BaseElement = {
     | "Multi-line Input"
     | "Two Column Row"
     | "Three Column Row"
-    | "Four Column Row"
+    | "Multi Column Row"
     | "Image"
     | "Rating"
     | "Date"
@@ -127,6 +127,8 @@ export interface FormBuilderProps {
   onPost?: (data: FormBuilderPostData) => void;
   saveUrl?: string;
   saveAlways?: boolean;
+  editMode?: boolean;
+  renderEditForm?: (props: BaseElement) => React.ReactNode;
 }
 
 export class ReactFormBuilder extends React.Component<FormBuilderProps> {}
@@ -154,6 +156,7 @@ export interface FormGeneratorProps {
   read_only?: boolean;
   // eslint-disable-next-line no-undef
   variables?: Record<any, any>;
+  submitButton?: JSX.Element;
 }
 
 export class ReactFormGenerator extends React.Component<FormGeneratorProps> {}
