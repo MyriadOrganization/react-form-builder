@@ -25,11 +25,6 @@ export default class Demobar extends React.Component {
     });
   }
 
-  handleChange = (evt) => {
-    console.log("handleChange", evt);
-    this.props.onChange && this.props.onChange(evt);
-  };
-
   render() {
     const { answers, data } = this.state;
 

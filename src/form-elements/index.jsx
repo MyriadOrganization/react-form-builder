@@ -242,6 +242,8 @@ class TextArea extends React.Component {
     props.name = this.props.data.field_name;
     props.onChange = this.props.handleChange;
 
+    console.log("event0:", this.props);
+
     if (this.props.read_only) {
       props.disabled = "disabled";
     }
