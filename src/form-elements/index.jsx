@@ -132,6 +132,7 @@ class TextInput extends React.Component {
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
       props.ref = this.inputField;
+      props.onChange = this.props.handleChange;
     }
 
     let baseClasses = "SortableItem rfb-item";
@@ -240,9 +241,6 @@ class TextArea extends React.Component {
     const props = {};
     props.className = "form-control";
     props.name = this.props.data.field_name;
-    props.onChange = this.props.handleChange;
-
-    console.log("event0:", this.props);
 
     if (this.props.read_only) {
       props.disabled = "disabled";
@@ -251,7 +249,6 @@ class TextArea extends React.Component {
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
       props.ref = this.inputField;
-      props.onChange = this.props.handleChange;
     }
 
     let baseClasses = "SortableItem rfb-item";
@@ -459,6 +456,11 @@ class Checkboxes extends React.Component {
   render() {
     const self = this;
     let classNames = "custom-control custom-checkbox";
+
+    if (this.props.mutable) {
+      props.onChange = this.props.handleChange;
+    }
+
     if (this.props.data.inline) {
       classNames += " option-inline";
     }
