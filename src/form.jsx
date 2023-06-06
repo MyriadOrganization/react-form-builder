@@ -296,6 +296,7 @@ class ReactForm extends React.Component {
       return this.getCustomElement(item);
     }
     const Input = FormElements[item.element];
+    console.log({Input})
     return (
       <Input
         handleChange={this.handleChange}
