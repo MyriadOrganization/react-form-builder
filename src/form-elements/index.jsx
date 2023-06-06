@@ -234,6 +234,7 @@ class NumberInput extends React.Component {
 
 class TextArea extends React.Component {
   constructor(props) {
+    console.log({props})
     super(props);
     this.inputField = React.createRef();
   }
