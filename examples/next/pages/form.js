@@ -1,6 +1,6 @@
-import React from "react";
-import { ReactFormGenerator } from "react-form-builder2";
-import { get } from "../components/requests";
+import React from 'react';
+import { ReactFormGenerator } from 'react-form-builder2';
+import { get } from '../components/requests';
 
 export default class Demobar extends React.Component {
   constructor(props) {
@@ -25,30 +25,19 @@ export default class Demobar extends React.Component {
     });
   }
 
-  handleChange = (evt) => {
-    console.log("handleChange", evt);
-    this.props.onChange && this.props.onChange(evt);
-  };
-
   render() {
     const { answers, data } = this.state;
 
-    let roModalClass = "modal ro-modal";
+    let roModalClass = 'modal ro-modal';
     if (this.state.roPreviewVisible) {
-      roModalClass += " show d-block";
+      roModalClass += ' show d-block';
     }
 
     return (
-      <div className="clearfix" style={{ margin: "10px", width: "70%" }}>
+      <div className="clearfix" style={{ margin: '10px', width: '70%' }}>
         <h4 className="float-left">Preview</h4>
-        <button
-          className="btn btn-default float-right"
-          style={{ marginRight: "10px" }}
-          onClick={this.showRoPreview.bind(this)}
-        >
-          Read Only Form
-        </button>
-        {this.state.roPreviewVisible && (
+        <button className="btn btn-default float-right" style={{ marginRight: '10px' }} onClick={this.showRoPreview.bind(this)}>Read Only Form</button>
+        { this.state.roPreviewVisible &&
           <div className={roModalClass}>
             <div className="modal-dialog modal-lg">
               <div className="modal-content">
@@ -64,23 +53,14 @@ export default class Demobar extends React.Component {
                     read_only={true}
                     variables={this.props.variables}
                     hide_actions={true}
-                    data={data}
-                  />
+                    data={data} />
                 </div>
                 <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-default"
-                    data-dismiss="modal"
-                    onClick={this.closePreview.bind(this)}
-                  >
-                    Close
-                  </button>
+                  <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.closePreview.bind(this)}>Close</button>
                 </div>
               </div>
             </div>
-          </div>
-        )}
+          </div>}
       </div>
     );
   }
@@ -88,7 +68,7 @@ export default class Demobar extends React.Component {
 
 // eslint-disable-next-line func-names
 Demobar.getInitialProps = async function ({ req }) {
-  const protocol = req.headers.referer.split("://")[0];
+  const protocol = req.headers.referer.split('://')[0];
   const hostUrl = `${protocol}://${req.headers.host}`;
   const url = `${hostUrl}/api/formdata`;
   const getUrl = `${hostUrl}/api/form`;
