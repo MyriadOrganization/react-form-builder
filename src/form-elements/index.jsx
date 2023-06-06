@@ -120,6 +120,7 @@ class LineBreak extends React.Component {
 
 class TextInput extends React.Component {
   constructor(props) {
+    console.log("constructor: ", props);
     super(props);
     this.inputField = React.createRef();
   }
