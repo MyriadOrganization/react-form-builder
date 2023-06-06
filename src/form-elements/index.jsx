@@ -294,12 +294,14 @@ class TextArea extends React.Component {
       baseClasses += " alwaysbreak";
     }
 
+    console.log("PROPS: ", props);
+
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
         <div className="form-group">
           <ComponentLabel {...this.props} />
-          <textarea {...props} />
+          <textarea onChange={this.props.handleChange} />
         </div>
       </div>
     );
