@@ -234,7 +234,7 @@ class NumberInput extends React.Component {
 
 class TextArea extends React.Component {
   constructor(props) {
-    console.log({props})
+    console.log({ props });
     super(props);
     this.inputField = React.createRef();
   }
@@ -345,7 +345,7 @@ class Signature extends React.Component {
       props.defaultValue = defaultValue;
       props.ref = this.inputField;
     }
-    const pad_props = {clearOnResize: false};
+    const pad_props = { clearOnResize: false };
     // umd requires canvasProps={{ width: 400, height: 150 }}
     if (this.props.mutable) {
       pad_props.defaultValue = defaultValue;
@@ -460,7 +460,7 @@ class Checkboxes extends React.Component {
     let classNames = "custom-control custom-checkbox";
 
     if (this.props.mutable) {
-      props.onChange = this.props.handleChange;
+      this.props.onChange = this.props.handleChange;
     }
 
     if (this.props.data.inline) {
