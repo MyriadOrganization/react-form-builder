@@ -459,9 +459,9 @@ class Checkboxes extends React.Component {
     const self = this;
     let classNames = "custom-control custom-checkbox";
 
-    if (this.props.mutable) {
-      this.props.onChange = this.props.handleChange;
-    }
+    // if (this.props.mutable) {
+    //   this.props.onChange = this.props.handleChange;
+    // }
 
     if (this.props.data.inline) {
       classNames += " option-inline";
