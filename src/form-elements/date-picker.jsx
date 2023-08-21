@@ -128,7 +128,7 @@ class DatePicker extends React.Component {
         <div className="form-group">
           <ComponentLabel {...this.props} />
           <div>
-            {readOnly && (
+            {readOnly ? (
               <input
                 type="text"
                 name={props.name}
@@ -138,20 +138,7 @@ class DatePicker extends React.Component {
                 value={this.state.value}
                 className="form-control"
               />
-            )}
-            {iOS && !readOnly && (
-              <input
-                type="text"
-                name={props.name}
-                ref={props.ref}
-                onChange={this.handleChange}
-                dateFormat="MM/DD/YYYY"
-                placeholder={this.state.placeholder}
-                value={this.state.value}
-                className="form-control"
-              />
-            )}
-            {!iOS && !readOnly && (
+            ) : (
               <ReactDatePicker
                 name={props.name}
                 ref={props.ref}
