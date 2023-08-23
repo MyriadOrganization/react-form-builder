@@ -120,7 +120,6 @@ class LineBreak extends React.Component {
 
 class TextInput extends React.Component {
   constructor(props) {
-    console.log("constructor: ", props);
     super(props);
     this.inputField = React.createRef();
   }
@@ -234,7 +233,6 @@ class NumberInput extends React.Component {
 
 class TextArea extends React.Component {
   constructor(props) {
-    console.log({ props });
     super(props);
     this.inputField = React.createRef();
   }
