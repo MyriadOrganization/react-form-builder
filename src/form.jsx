@@ -292,8 +292,6 @@ class ReactForm extends React.Component {
   }
 
   getInputElement(item) {
-    console.log("inside getInputElement", item);
-
     if (!item) {
       return null;
     }
