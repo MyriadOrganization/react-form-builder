@@ -1,7 +1,7 @@
 // eslint-disable-next-line max-classes-per-file
 import fetch from "isomorphic-fetch";
 import { saveAs } from "file-saver";
-import React from "react";
+import React, { useRef } from "react";
 import Select from "react-select";
 import SignaturePad from "react-signature-canvas";
 import ReactBootstrapSlider from "react-bootstrap-slider";
@@ -236,6 +236,26 @@ class TextArea extends React.Component {
     super(props);
     this.inputField = React.createRef();
   }
+
+  componentDidMount() {
+    this.updateTextareaHeight();
+  }
+
+  componentDidUpdate() {
+    this.updateTextareaHeight();
+  }
+
+  updateTextareaHeight = () => {
+    const textarea = this.inputField.current;
+    textarea.style.height = textarea.scrollHeight + "px"; // Set the height based on content
+  };
+
+  handleChange = (e) => {
+    this.updateTextareaHeight();
+    if (this.props.onChange) {
+      this.props.onChange(e);
+    }
+  };
 
   render() {
     const props = {};
