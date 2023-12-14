@@ -1,7 +1,7 @@
 // eslint-disable-next-line max-classes-per-file
 import fetch from "isomorphic-fetch";
 import { saveAs } from "file-saver";
-import React from "react";
+import React, { useRef } from "react";
 import Select from "react-select";
 import SignaturePad from "react-signature-canvas";
 import ReactBootstrapSlider from "react-bootstrap-slider";
@@ -237,6 +237,29 @@ class TextArea extends React.Component {
     this.inputField = React.createRef();
   }
 
+  componentDidMount() {
+    this.updateTextareaHeight();
+  }
+
+  componentDidUpdate() {
+    this.updateTextareaHeight();
+  }
+
+  updateTextareaHeight = () => {
+    const textarea = this.inputField.current;
+    if (textarea && textarea?.value?.length >= 0) {
+      textarea.style.height = "";
+    }
+    textarea.style.height = textarea.scrollHeight + "px"; // Set the height based on content
+  };
+
+  handleChange = (e) => {
+    this.updateTextareaHeight();
+    if (this.props.onChange) {
+      this.props.onChange(e);
+    }
+  };
+
   render() {
     const props = {};
     props.className = "form-control";
@@ -249,6 +272,7 @@ class TextArea extends React.Component {
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
       props.ref = this.inputField;
+      props.onChange = this.handleChange;
     }
 
     let baseClasses = "SortableItem rfb-item";
