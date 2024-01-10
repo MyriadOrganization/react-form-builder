@@ -170,6 +170,7 @@ class EmailInput extends React.Component {
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
       props.ref = this.inputField;
+      props.onChange = this.props.handleChange;
     }
 
     let baseClasses = "SortableItem rfb-item";
@@ -208,6 +209,7 @@ class NumberInput extends React.Component {
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
       props.ref = this.inputField;
+      props.onChange = this.props.handleChange;
     }
 
     if (this.props.read_only) {
@@ -249,6 +251,7 @@ class TextArea extends React.Component {
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
       props.ref = this.inputField;
+      props.onChange = this.props.handleChange;
     }
 
     let baseClasses = "SortableItem rfb-item";
@@ -282,6 +285,7 @@ class Dropdown extends React.Component {
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
       props.ref = this.inputField;
+      props.onChange = this.props.handleChange;
     }
 
     if (this.props.read_only) {
@@ -342,6 +346,7 @@ class Signature extends React.Component {
     if (this.props.mutable) {
       props.defaultValue = defaultValue;
       props.ref = this.inputField;
+      props.onChange = this.props.handleChange;
     }
     const pad_props = { clearOnResize: false };
     // umd requires canvasProps={{ width: 400, height: 150 }}
@@ -349,6 +354,7 @@ class Signature extends React.Component {
       pad_props.defaultValue = defaultValue;
       pad_props.ref = this.canvas;
       canClear = !this.props.read_only;
+      props.onChange = this.props.handleChange;
     }
 
     let baseClasses = "SortableItem rfb-item";
@@ -428,6 +434,7 @@ class Tags extends React.Component {
       props.isDisabled = this.props.read_only;
       props.value = this.state.value;
       props.ref = this.inputField;
+      props.onChange = this.props.handleChange;
     }
 
     let baseClasses = "SortableItem rfb-item";
@@ -456,10 +463,6 @@ class Checkboxes extends React.Component {
   render() {
     const self = this;
     let classNames = "custom-control custom-checkbox";
-
-    // if (this.props.mutable) {
-    //   this.props.onChange = this.props.handleChange;
-    // }
 
     if (this.props.data.inline) {
       classNames += " option-inline";
@@ -628,6 +631,7 @@ class Rating extends React.Component {
       props.editing = true;
       props.disabled = this.props.read_only;
       props.ref = this.inputField;
+      props.onChange = this.props.handleChange;
     }
 
     let baseClasses = "SortableItem rfb-item";
@@ -967,6 +971,7 @@ class Range extends React.Component {
 
     if (this.props.mutable) {
       props.ref = this.inputField;
+      props.onChange = this.props.handleChange;
     }
 
     const datalist = [];
