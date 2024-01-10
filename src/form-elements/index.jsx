@@ -489,6 +489,7 @@ class Checkboxes extends React.Component {
               props.defaultChecked =
                 self.props.defaultValue !== undefined &&
                 self.props.defaultValue.indexOf(option.key) > -1;
+                props.onChange = self.props.handleChange; 
             }
             if (this.props.read_only) {
               props.disabled = "disabled";
@@ -555,6 +556,7 @@ class RadioButtons extends React.Component {
                 self.props.defaultValue !== undefined &&
                 (self.props.defaultValue.indexOf(option.key) > -1 ||
                   self.props.defaultValue.indexOf(option.value) > -1);
+              props.onChange = self.props.handleChange;
             }
             if (this.props.read_only) {
               props.disabled = "disabled";
