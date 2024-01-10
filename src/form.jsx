@@ -230,7 +230,7 @@ class ReactForm extends React.Component {
   }
 
   handleChange = (evt) => {
-    console.log("handleChange", evt);
+    console.log("handleChange -><><><><><><>", evt);
     this.props.onChange && this.props.onChange(evt);
   };
 
