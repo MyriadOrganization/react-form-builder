@@ -22,6 +22,10 @@ class CustomElement extends Component {
       props.disabled = 'disabled';
     }
 
+    if (this.props.mutable) {
+      props.onChange = this.props.handleChange;
+    }
+
     // Return if component is invalid.
     if (!this.props.data.component) return null;
     const Element = this.props.data.component;

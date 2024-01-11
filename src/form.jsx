@@ -208,7 +208,6 @@ class ReactForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log("handle submit inside the form builder library", e, this.props);
     let errors = [];
     if (!this.props.skip_validations) {
       errors = this.validateForm();
@@ -230,7 +229,6 @@ class ReactForm extends React.Component {
   }
 
   handleChange = (evt) => {
-    console.log("handleChange -><><><><><><>", evt);
     this.props.onChange && this.props.onChange(evt);
   };
 
@@ -330,7 +328,14 @@ class ReactForm extends React.Component {
 
   getSimpleElement(item) {
     const Element = FormElements[item.element];
-    return <Element mutable={true} key={`form_${item.id}`} data={item} handleChange={this.handleChange}/>;
+    return (
+      <Element
+        mutable={true}
+        key={`form_${item.id}`}
+        data={item}
+        handleChange={this.handleChange}
+      />
+    );
   }
 
   getCustomElement(item) {
