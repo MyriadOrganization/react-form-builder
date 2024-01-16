@@ -18,6 +18,7 @@ class DatePicker extends React.Component {
   handleChange = (dt) => {
     let placeholder;
     const { formatMask } = this.state;
+    let formattedDate = "";
     if (dt && dt.target) {
       placeholder =
         dt && dt.target && dt.target.value === ""
@@ -32,12 +33,22 @@ class DatePicker extends React.Component {
         placeholder,
       });
     } else {
+      formattedDate = dt ? format(dt, formatMask) : "";
       this.setState({
-        value: dt ? format(dt, formatMask) : "",
+        value: formattedDate,
         internalValue: dt,
         placeholder,
       });
     }
+
+    const event = {
+      target: {
+        name: this.props.data.field_name,
+        value: formattedDate,
+      },
+    };
+
+    this.props.handleChange(event);
   };
 
   static updateFormat(props, oldFormatMask) {
@@ -115,6 +126,7 @@ class DatePicker extends React.Component {
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
       props.ref = this.inputField;
+      props.onChange = this.props.handleChange;
     }
 
     let baseClasses = "SortableItem rfb-item";

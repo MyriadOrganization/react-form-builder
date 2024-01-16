@@ -208,7 +208,6 @@ class ReactForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log("handle submit inside the form builder library", e, this.props);
     let errors = [];
     if (!this.props.skip_validations) {
       errors = this.validateForm();
@@ -230,7 +229,6 @@ class ReactForm extends React.Component {
   }
 
   handleChange = (evt) => {
-    console.log("handleChange", evt);
     this.props.onChange && this.props.onChange(evt);
   };
 
@@ -323,13 +321,21 @@ class ReactForm extends React.Component {
         key={`form_${item.id}`}
         data={item}
         controls={controls}
+        handleChange={this.handleChange}
       />
     );
   }
 
   getSimpleElement(item) {
     const Element = FormElements[item.element];
-    return <Element mutable={true} key={`form_${item.id}`} data={item} />;
+    return (
+      <Element
+        mutable={true}
+        key={`form_${item.id}`}
+        data={item}
+        handleChange={this.handleChange}
+      />
+    );
   }
 
   getCustomElement(item) {
@@ -357,6 +363,7 @@ class ReactForm extends React.Component {
         read_only={this.props.read_only}
         key={`form_${item.id}`}
         data={item}
+        handleChange={this.handleChange}
         {...inputProps}
       />
     );
@@ -443,6 +450,7 @@ class ReactForm extends React.Component {
                 key={`form_${item.id}`}
                 data={item}
                 defaultValue={this._getDefaultValue(item)}
+                handleChange={this.handleChange}
               />
             );
           case "Checkboxes":
