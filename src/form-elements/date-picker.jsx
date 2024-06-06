@@ -111,6 +111,10 @@ class DatePicker extends React.Component {
     return null;
   }
 
+  isValidDate(d) {
+    return d instanceof Date && !isNaN(d);
+  }
+
   render() {
     const { showTimeSelect, showTimeSelectOnly, showTimeInput } =
       this.props.data;
@@ -155,7 +159,11 @@ class DatePicker extends React.Component {
                 name={props.name}
                 ref={props.ref}
                 onChange={this.handleChange}
-                selected={this.state.internalValue}
+                selected={
+                  this.isValidDate(this.state.internalValue)
+                    ? this.state.internalValue
+                    : undefined
+                }
                 todayButton={"Today"}
                 className="form-control"
                 isClearable={true}
