@@ -94,13 +94,13 @@ class ReactForm extends React.Component {
     if (item.canHaveAnswer) {
       const ref = this.inputs[item.field_name];
       if (item.element === "Checkboxes" || item.element === "RadioButtons") {
-        item.options.forEach((option) => {
+        item?.options?.forEach((option) => {
           const $option = ReactDOM.findDOMNode(
-            ref.options[`child_ref_${option.key}`]
+            ref?.options?.[`child_ref_${option.key}`]
           );
           if (
-            (option.hasOwnProperty("correct") && !$option.checked) ||
-            (!option.hasOwnProperty("correct") && $option.checked)
+            (option?.hasOwnProperty("correct") && !$option?.checked) ||
+            (!option?.hasOwnProperty("correct") && $option?.checked)
           ) {
             incorrect = true;
           }
@@ -127,11 +127,11 @@ class ReactForm extends React.Component {
       const ref = this.inputs[item.field_name];
       if (item.element === "Checkboxes" || item.element === "RadioButtons") {
         let checked_options = 0;
-        item.options.forEach((option) => {
+        item?.options?.forEach((option) => {
           const $option = ReactDOM.findDOMNode(
-            ref.options[`child_ref_${option.key}`]
+            ref?.options?.[`child_ref_${option.key}`]
           );
-          if ($option.checked) {
+          if ($option?.checked) {
             checked_options += 1;
           }
         });
@@ -162,12 +162,12 @@ class ReactForm extends React.Component {
     const ref = this.inputs[item.field_name];
     if (item.element === "Checkboxes" || item.element === "RadioButtons") {
       const checked_options = [];
-      item.options.forEach((option) => {
+      item?.options?.forEach((option) => {
         const $option = ReactDOM.findDOMNode(
-          ref.options[`child_ref_${option.key}`]
+          ref?.options?.[`child_ref_${option?.key}`]
         );
-        if ($option.checked) {
-          checked_options.push(option.key);
+        if ($option?.checked) {
+          checked_options.push(option?.key);
         }
       });
       itemData.value = checked_options;
