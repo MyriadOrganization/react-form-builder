@@ -477,7 +477,7 @@ class Toolbar extends React.Component {
     const { intl } = this.props;
     const filteredItems = this.filterItems();
     return (
-      <div className="col-md-3 react-form-builder-toolbar float-right">
+      <div className="col-md-4 react-form-builder-toolbar float-right">
         <div className="toolbar-heading">
           <p className="!text-primary-900">
             {intl.formatMessage({ id: "toolbox" })}
