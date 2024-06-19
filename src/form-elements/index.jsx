@@ -34,7 +34,7 @@ class Header extends React.Component {
       <div style={{ ...this.props.style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
         <h3
-          className={classNames}
+          className={`${classNames} header`}
           dangerouslySetInnerHTML={{
             __html: myxss.process(this.props.data.content),
           }}
@@ -127,7 +127,7 @@ class TextInput extends React.Component {
   render() {
     const props = {};
     props.type = "text";
-    props.className = "form-control";
+    props.className = "form-control shared-input";
     props.name = this.props.data.field_name;
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
@@ -143,7 +143,6 @@ class TextInput extends React.Component {
     if (this.props.read_only) {
       props.disabled = "disabled";
     }
-
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
@@ -165,7 +164,7 @@ class EmailInput extends React.Component {
   render() {
     const props = {};
     props.type = "text";
-    props.className = "form-control";
+    props.className = "form-control shared-input";
     props.name = this.props.data.field_name;
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
@@ -203,7 +202,7 @@ class NumberInput extends React.Component {
   render() {
     const props = {};
     props.type = "number";
-    props.className = "form-control";
+    props.className = "form-control shared-input";
     props.name = this.props.data.field_name;
 
     if (this.props.mutable) {
@@ -241,7 +240,7 @@ class TextArea extends React.Component {
 
   render() {
     const props = {};
-    props.className = "form-control";
+    props.className = "form-control shared-input";
     props.name = this.props.data.field_name;
 
     if (this.props.read_only) {
@@ -279,7 +278,7 @@ class Dropdown extends React.Component {
 
   render() {
     const props = {};
-    props.className = "form-control";
+    props.className = "form-control shared-input dropdown";
     props.name = this.props.data.field_name;
 
     if (this.props.mutable) {
@@ -489,7 +488,7 @@ class Checkboxes extends React.Component {
               props.defaultChecked =
                 self.props.defaultValue !== undefined &&
                 self.props.defaultValue.indexOf(option.key) > -1;
-                props.onChange = self.props.handleChange; 
+              props.onChange = self.props.handleChange;
             }
             if (this.props.read_only) {
               props.disabled = "disabled";
@@ -529,7 +528,7 @@ class RadioButtons extends React.Component {
 
   render() {
     const self = this;
-    let classNames = "custom-control custom-radio";
+    let classNames = "custom-control custom-radio ";
     if (this.props.data.inline) {
       classNames += " option-inline";
     }
@@ -566,7 +565,7 @@ class RadioButtons extends React.Component {
               <div className={classNames} key={this_key}>
                 <input
                   id={`fid_${this_key}`}
-                  className="custom-control-input"
+                  className="custom-control-input "
                   ref={(c) => {
                     if (c && self.props.mutable) {
                       self.options[`child_ref_${option.key}`] = c;
@@ -663,7 +662,7 @@ class HyperLink extends React.Component {
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
-        <div className="form-group">
+        <div className="form-group hyperlink">
           <a target="_blank" href={this.props.data.href}>
             {this.props.data.content}
           </a>
@@ -703,7 +702,7 @@ class Camera extends React.Component {
 
   displayImage = (e) => {
     const self = this;
-    const target = e.target;
+    const { target } = e;
     let file;
     let reader;
 
@@ -822,7 +821,7 @@ class FileUpload extends React.Component {
 
   displayFileUpload = (e) => {
     const self = this;
-    const target = e.target;
+    const { target } = e;
     let file;
 
     if (target.files && target.files.length > 0) {

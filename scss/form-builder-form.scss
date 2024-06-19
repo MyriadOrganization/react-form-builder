@@ -7,6 +7,13 @@ input[type="date"]:before {
 input[type="date"] {
   width: 200px;
 }
+// input[type="radio"] {
+//   width: 24px !important;
+//   height: 24px !important;
+//   color: white !important;
+//   border: 1px solid #8fa0a7 !important;
+//   border-radius: 100% !important;
+// }
 .validation-error {
   position: fixed;
   width: 100%;
@@ -23,10 +30,16 @@ input[type="date"] {
 }
 .react-form-builder-form {
   position: relative;
-
-  .rfb-item.alwaysbreak { page-break-before: always; }
-  .rfb-item.nobreak:before { clear:both; }
-  .rfb-item.nobreak { page-break-inside: avoid; }
+  font-family: "Plus Jakarta Sans";
+  .rfb-item.alwaysbreak {
+    page-break-before: always;
+  }
+  .rfb-item.nobreak:before {
+    clear: both;
+  }
+  .rfb-item.nobreak {
+    page-break-inside: avoid;
+  }
 
   .rfb-item {
     padding: 10px 0;
@@ -37,6 +50,7 @@ input[type="date"] {
     }
     label {
       font-weight: normal;
+      color: #374145;
     }
 
     .bold {
@@ -56,9 +70,10 @@ input[type="date"] {
       }
 
       a {
+        // color: #13b9ff !important;
         cursor: pointer;
       }
-      input[type='date'] {
+      input[type="date"] {
         height: 42px;
       }
       .m-signature-pad {
@@ -68,7 +83,8 @@ input[type="date"] {
       .react-star-rating {
         display: block;
       }
-      .checkbox-label, .radio-label {
+      .checkbox-label,
+      .radio-label {
         font-weight: normal;
         display: block;
       }

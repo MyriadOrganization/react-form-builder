@@ -2,13 +2,13 @@
   .react-form-builder-preview {
     // position: relative;
     // width: 70%;
-    border: 1px solid #ddd;
-    background: #fafafa;
+    // border: 1px solid #ddd;
+    background: #f5fcff;
     padding: 10px;
-    box-shadow: 0 0 2px 1px rgba(0,0,0,0.1);
+    // box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
     min-height: 750px;
-    width:100%;
-
+    width: 100%;
+    font-family: "Plus Jakarta Sans";
     .preview-page-break {
       padding: 5px 0;
       border-top: 2px dotted #ccc;
@@ -28,7 +28,9 @@
     }
 
     label {
-      font-weight: normal;
+      font-weight: 400;
+      color: #374145;
+      font-size: 14px;
     }
 
     .bold {
@@ -66,10 +68,11 @@
       height: 100%;
       // width: 0;
       width: 715px;
-      transition: .5s;
+      transition: 0.5s;
       overflow-y: auto;
 
-      h4, .dismiss-edit {
+      h4,
+      .dismiss-edit {
         margin-bottom: 30px;
       }
       .dismiss-edit {
@@ -98,6 +101,9 @@
               margin-left: 0;
             }
           }
+        }
+        .text-input {
+          border-radius: 20px !important;
         }
       }
       .dynamic-option-list {
@@ -132,7 +138,7 @@
       }
     }
     .Sortable {
-      transition: opacity .25s ease-in;
+      transition: opacity 0.25s ease-in;
       position: relative;
       cursor: move;
       -webkit-touch-callout: none;
@@ -142,21 +148,39 @@
       -ms-user-select: none;
       user-select: none;
       .rfb-item {
-        padding: 10px 20px;
+        // padding: 10px 20px;
+        border: 1px #b0eaff solid !important;
+        padding-top: 0 !important;
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+
         &.SortableItem {
+          & > :not(:first-child) {
+            padding: 10px 20px 0;
+          }
           position: relative;
+          border-radius: 11px;
           .form-group {
             pointer-events: none;
-            label, select, input, a {
+            label,
+            select,
+            input,
+            a {
               cursor: move;
             }
-            input[type='date'] {
+            .hyperlink {
+              a {
+                color: #b0eaff !important;
+              }
+            }
+            input[type="date"] {
               height: 42px;
             }
             .react-star-rating {
               display: block;
             }
-            .checkbox-label, .radio-label {
+            .checkbox-label,
+            .radio-label {
               font-weight: normal;
               display: block;
             }
@@ -167,7 +191,7 @@
           &.is-dragging {
             position: absolute;
             z-index: 1688;
-            border: 2px #ccc dashed;
+            border: 2px #ccc solid !important;
             background: #fff;
             cursor: move;
             padding: 10px 20px;
@@ -176,35 +200,80 @@
         &.is-placeholder {
           display: block;
           z-index: auto;
-          opacity: .4;
-          border: 2px #ccc dashed;
+          opacity: 0.4;
+          border: 2px #ccc solid;
         }
         .toolbar-header {
-          opacity: 0; // visible
+          // opacity: 0; // visible
           z-index: 100;
           position: relative;
+          background-color: #f5fcff;
+          color: #13b9ff;
+          font-weight: 600;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-radius: 10px;
+          border-bottom-right-radius: 0;
+          border-bottom-left-radius: 0;
+          padding: 10px;
           .label {
             position: absolute;
             left: 20px;
           }
+          .toolbar-header-buttons-container {
+            display: flex;
+            justify-content: space-between;
+          }
           .toolbar-header-buttons {
+            opacity: 0;
             position: absolute;
-            right: 20px;
-            margin-top:-20px;
+            right: 60px;
+            margin-right: 10px;
+          }
+          &:hover {
+            background-color: #8ae0ff;
+            color: #004f6b;
+            .toolbar-header-buttons {
+              opacity: 1;
+              position: absolute;
+              right: 30px;
+            }
+            .dragSvg {
+              svg {
+                path {
+                  fill: #004f6b;
+                }
+              }
+            }
           }
         }
         &:hover {
-          box-shadow: inset 0 0 5px #ddd;
-          background: #fff;
-          select, input {
+          // box-shadow: inset 0 0 5px #ddd;
+          // background: #fff;
+          border: 1px #54d2ff solid !important;
+
+          select,
+          input {
             cursor: move;
             pointer-events: none;
+            border-radius: 6px;
           }
           .toolbar-header {
             opacity: 1;
           }
         }
       }
+    }
+    .startAdd {
+      color: #004f6b;
+      font-size: 18px;
+      font-weight: 500;
+    }
+    .buildForm {
+      font-size: 14px;
+      color: #cdd5d8;
+      font-weight: 400;
     }
     &.is-editing {
       // .Sortable {
@@ -214,37 +283,87 @@
       .edit-form {
         z-index: 2000;
         border-right: 1px solid #ddd;
-        box-shadow: 0 0 2px 1px rgba(0,0,0,0.1);
+        box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
         // width: 80%;
         left: 0;
-        transition: .5s;
+        transition: 0.5s;
       }
+    }
+    .placeholder_text {
+      font-family: "Plus Jakarta Sans";
+      color: #33c9ff;
+      font-size: 14px;
     }
   }
 
   .react-form-builder-toolbar {
     width: 100%;
     background: #fff;
-    margin-top: -30px;
-
+    // margin-top: -30px;
+    .toolbar-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+    }
     h4 {
       margin-top: 0;
       text-align: center;
     }
+    p {
+      color: #004f6b;
+      margin: 0 !important;
+      font-weight: 500;
+      font-family: "Plus Jakarta Sans";
+    }
+    .search_container {
+      position: relative;
+      display: inline-block;
+      svg {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+      }
+      input {
+        border: 1px solid #eceff0;
+        border-radius: 24px;
+        padding: 6px 10px;
+        outline: none;
+        color: #6d828b;
+        font-family: "Plus Jakarta Sans";
+        font-size: 12px;
+        padding-left: 30px;
+        box-sizing: border-box;
+      }
+    }
     .form-group {
       padding: 10px;
-      border: 1px dashed #ddd;
+      border: 1px solid #ddd;
     }
     ul {
       padding: 0;
+      overflow-y: scroll;
       li {
+        display: flex;
+        justify-content: space-between;
         cursor: pointer;
         list-style: none;
-        margin: 5px;
+        margin: 0 0px 5px;
         padding: 10px;
-        border: 1px dashed #ddd;
-        i {
-          margin: 0 15px 0 10px;
+        border: 1px solid #eceff0;
+        border-radius: 6px;
+        color: #004f6b;
+        font-family: "Plus Jakarta Sans";
+        font-weight: 500;
+        svg {
+          margin: 0 10px 0 0px;
+        }
+        .dragHandle_li {
+          svg {
+            margin: 0;
+          }
         }
       }
     }
@@ -270,12 +389,12 @@
 
 .image-upload-preview {
   border: 4px solid #fff;
-  box-shadow: 0 0 2px 2px rgba(0,0,0,0.1);
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
 }
 
 .file-upload-preview {
   border: 4px solid #fff;
-  box-shadow: 0 0 2px 2px rgba(0,0,0,0.1);
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
   padding: 5px;
 }
 
@@ -289,7 +408,7 @@
   padding: 10px;
 }
 
-@media ( max-width: $screen-sm-min ) {
+@media (max-width: $screen-sm-min) {
   .react-form-builder {
     position: relative;
 
@@ -322,7 +441,6 @@
     }
 
     .react-form-builder-toolbar {
-
       h4 {
         padding: 10px;
         background: #7a0019;
@@ -337,8 +455,8 @@
       -webkit-transition: transform 0.5s;
       transition: transform 0.5s;
 
-      -webkit-transform: translate(0,0);
-      transform: translate(0,0);
+      -webkit-transform: translate(0, 0);
+      transform: translate(0, 0);
 
       right: 0;
       border-top: 2px solid #ccc;
@@ -350,8 +468,8 @@
     }
 
     .active-toolbar {
-      -webkit-transform: translate(0,-300px);
-      transform: translate(0,-300px);
+      -webkit-transform: translate(0, -300px);
+      transform: translate(0, -300px);
     }
   }
 
@@ -417,16 +535,33 @@
 }
 
 .form-place-holder {
-  margin:10px; 
-  border:2px dashed #bbb;
-  -moz-border-radius:5px;
-  -webkit-border-radius:5px;
-  border-radius:5px;
-  padding:25px;
-  text-align:center;
-  font:20pt bold,"Vollkorn";color:#bbb
+  // margin: 10px;
+  border: 1px dashed #13b9ff;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 8px;
+  padding: 25px;
+  text-align: center;
+  font: 20pt bold, "Vollkorn";
+  color: #33c9ff;
+  background-color: #fff;
 }
 
 .form-place-holder-hidden {
   min-height: 50px;
+}
+.shared-input {
+  border-radius: 6px;
+  color: #8fa0a7;
+  font-size: 14px;
+  font-family: "Plus Jakarta Sans";
+  font-weight: 400;
+}
+.dropdown {
+  padding-right: 10px !important;
+}
+.header {
+  color: #374145;
+  font-family: "Plus Jakarta Sans";
+  font-size: 32px;
 }
