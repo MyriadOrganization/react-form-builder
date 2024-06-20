@@ -1,11 +1,7 @@
 .react-form-builder {
   .react-form-builder-preview {
-    // position: relative;
-    // width: 70%;
-    // border: 1px solid #ddd;
-    background: #f5fcff;
+    background: #fafdff;
     padding: 10px;
-    // box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
     min-height: 750px;
     width: 100%;
     font-family: "Plus Jakarta Sans";
@@ -66,7 +62,6 @@
       top: 0;
       left: -1000px;
       height: 100%;
-      // width: 0;
       width: 715px;
       transition: 0.5s;
       overflow-y: auto;
@@ -148,13 +143,13 @@
       -ms-user-select: none;
       user-select: none;
       .rfb-item {
-        // padding: 10px 20px;
         border: 1px #b0eaff solid !important;
         padding-top: 0 !important;
         padding-right: 0 !important;
         padding-left: 0 !important;
 
         &.SortableItem {
+          margin-bottom: 8px !important;
           & > :not(:first-child) {
             padding: 10px 20px 0;
           }
@@ -204,10 +199,9 @@
           border: 2px #ccc solid;
         }
         .toolbar-header {
-          // opacity: 0; // visible
           z-index: 100;
           position: relative;
-          background-color: #f5fcff;
+          background-color: #fafdff;
           color: #13b9ff;
           font-weight: 600;
           display: flex;
@@ -249,8 +243,6 @@
           }
         }
         &:hover {
-          // box-shadow: inset 0 0 5px #ddd;
-          // background: #fff;
           border: 1px #54d2ff solid !important;
 
           select,
@@ -276,15 +268,10 @@
       font-weight: 400;
     }
     &.is-editing {
-      // .Sortable {
-      //   opacity: .5;
-      //   transition: opacity .25s ease-in;
-      // }
       .edit-form {
         z-index: 2000;
         border-right: 1px solid #ddd;
         box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
-        // width: 80%;
         left: 0;
         transition: 0.5s;
       }
@@ -450,7 +437,6 @@
       }
 
       width: 100%;
-      // position: fixed;
       z-index: 900;
       bottom: -320px;
 
@@ -537,7 +523,6 @@
 }
 
 .form-place-holder {
-  // margin: 10px;
   border: 1px dashed #13b9ff;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
