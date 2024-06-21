@@ -1,5 +1,8 @@
 .react-form-builder {
+  display: flex;
+  height: 100%;
   .react-form-builder-preview {
+    overflow: auto;
     background: #fafdff;
     padding: 10px;
     min-height: 750px;
@@ -10,7 +13,7 @@
       border-top: 2px dotted #ccc;
       border-bottom: 2px dotted #ccc;
       background: #eee;
-      text-align: center;
+      text-align: center; 
       width: 100%;
       font-weight: bold;
       margin: 5px 0;
@@ -284,15 +287,16 @@
   }
 
   .react-form-builder-toolbar {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     background: #fff;
     border-radius: 16px;
-    margin-top: 16px;
+    padding-top: 16px;
     .toolbar-heading {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 0;
     }
     h4 {
       margin-top: 0;
@@ -331,9 +335,15 @@
       border: 1px solid #ddd;
     }
     ul {
-      padding: 0;
+      padding: 0 5px 0;
       overflow-y: scroll;
-      position: static !important;
+      position: sticky;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      height: calc(100% - 32px);
+      margin-top: 16px;
+      float: none !important;
       li {
         display: flex;
         justify-content: space-between;

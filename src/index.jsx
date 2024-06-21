@@ -66,7 +66,6 @@ class ReactFormBuilder extends React.Component {
            <Container />
          </div> */}
             <div className="react-form-builder clearfix">
-              <div>
                 <Preview
                   files={this.props.files}
                   manualEditModeOff={this.manualEditModeOff.bind(this)}
@@ -86,7 +85,6 @@ class ReactFormBuilder extends React.Component {
                   saveAlways={this.props.saveAlways}
                 />
                 <Toolbar {...toolbarProps} customItems={this.props.customToolbarItems} />
-              </div>
             </div>
           </div>
         </IntlProvider>
