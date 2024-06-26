@@ -310,6 +310,9 @@ export default class Preview extends React.Component {
     const items = data.map((item, index) => this.getElement(item, index));
     return (
       <div className={classes}>
+        {items.length !== 0 && (
+          <p className="afterAdd">Components being used in the form.</p>
+        )}
         <div className="edit-form" ref={this.editForm}>
           {this.props.editElement !== null && this.showEditForm()}
         </div>

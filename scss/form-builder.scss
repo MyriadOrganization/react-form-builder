@@ -13,7 +13,7 @@
       border-top: 2px dotted #ccc;
       border-bottom: 2px dotted #ccc;
       background: #eee;
-      text-align: center; 
+      text-align: center;
       width: 100%;
       font-weight: bold;
       margin: 5px 0;
@@ -269,6 +269,11 @@
       font-size: 14px;
       color: #cdd5d8;
       font-weight: 400;
+    }
+    .afterAdd {
+      font-size: 14px;
+      font-weight: 500;
+      color: #cdd5d8;
     }
     &.is-editing {
       .edit-form {
@@ -533,6 +538,7 @@
 }
 
 .form-place-holder {
+  margin-top: 8px;
   border: 1px dashed #13b9ff;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
