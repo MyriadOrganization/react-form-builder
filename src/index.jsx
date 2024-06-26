@@ -56,7 +56,7 @@ class ReactFormBuilder extends React.Component {
         <IntlProvider
           locale={currentAppLocale.locale}
           messages={currentAppLocale.messages}>
-          <div>
+          <div className='overflow-hidden'>
             {/* <div>
            <p>
              It is easy to implement a sortable interface with React DnD. Just make

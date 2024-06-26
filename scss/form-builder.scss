@@ -1,3 +1,7 @@
+.overflow-hidden{
+  overflow: hidden;
+}
+
 .react-form-builder {
   display: flex;
   height: 100%;
@@ -5,7 +9,7 @@
     overflow: auto;
     background: #fafdff;
     padding: 10px;
-    min-height: 750px;
+    min-height: 500px;
     width: 100%;
     font-family: "Plus Jakarta Sans";
     .preview-page-break {
