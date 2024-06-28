@@ -40,6 +40,7 @@ class Toolbar extends React.Component {
     };
     this.create = this.create.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
+    this.clearSearch = this.clearSearch.bind(this);
   }
 
   componentDidMount() {
@@ -460,6 +461,10 @@ class Toolbar extends React.Component {
     this.setState({ searchQuery: event.target.value });
   }
 
+  clearSearch() {
+    this.setState({ searchQuery: "" });
+  }
+
   filterItems() {
     const { items, searchQuery } = this.state;
     if (!searchQuery) {
@@ -502,6 +507,25 @@ class Toolbar extends React.Component {
               value={this.state.searchQuery}
               onChange={this.handleSearchChange}
             />
+            {this.state.searchQuery && (
+              <svg
+                onClick={this.clearSearch}
+                width="10"
+                height="10"
+                viewBox="0 0 12 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="close-icon"
+              >
+                <path
+                  d="M1 11L11 1M1 1L11 11"
+                  stroke="#737373"
+                  strokeWidth="1.67"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            )}
           </div>
         </div>
         <ul>

@@ -1,4 +1,4 @@
-.overflow-hidden{
+.overflow-hidden {
   overflow: hidden;
 }
 
@@ -326,6 +326,12 @@
         top: 50%;
         transform: translateY(-50%);
         pointer-events: none;
+      }
+      .close-icon {
+        left: auto;
+        right: 10px;
+        pointer-events: auto;
+        cursor: pointer;
       }
       input {
         border: 1px solid #eceff0;
