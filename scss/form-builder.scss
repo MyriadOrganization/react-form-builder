@@ -298,14 +298,16 @@
   .react-form-builder-toolbar {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 51%;
     background: #fff;
     border-radius: 16px;
     padding-top: 16px;
+    margin-top: 16px;
     .toolbar-heading {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-left: 6px;
     }
     h4 {
       margin-top: 0;
