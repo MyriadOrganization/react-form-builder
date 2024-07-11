@@ -293,16 +293,16 @@ class Toolbar extends React.Component {
         content: intl.formatMessage({ id: "place-holder-website-link" }),
         href: "http://www.example.com",
       },
-      {
-        key: "Download",
-        name: intl.formatMessage({ id: "file-attachment" }),
-        icon: "file-attach",
-        static: true,
-        content: intl.formatMessage({ id: "place-holder-file-name" }),
-        field_name: "download_",
-        file_path: "",
-        _href: "",
-      },
+      // {
+      //   key: "Download",
+      //   name: intl.formatMessage({ id: "file-attachment" }),
+      //   icon: "file-attach",
+      //   static: true,
+      //   content: intl.formatMessage({ id: "place-holder-file-name" }),
+      //   field_name: "download_",
+      //   file_path: "",
+      //   _href: "",
+      // },
       {
         key: "Range",
         name: intl.formatMessage({ id: "range" }),
@@ -323,13 +323,13 @@ class Toolbar extends React.Component {
         label: intl.formatMessage({ id: "place-holder-label" }),
         field_name: "camera_",
       },
-      {
-        key: "FileUpload",
-        name: intl.formatMessage({ id: "file-upload" }),
-        icon: "file-upload",
-        label: intl.formatMessage({ id: "place-holder-label" }),
-        field_name: "file_upload_",
-      },
+      // {
+      //   key: "FileUpload",
+      //   name: intl.formatMessage({ id: "file-upload" }),
+      //   icon: "file-upload",
+      //   label: intl.formatMessage({ id: "place-holder-label" }),
+      //   field_name: "file_upload_",
+      // },
     ];
   }
 
