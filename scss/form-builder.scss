@@ -227,6 +227,8 @@
             justify-content: space-between;
           }
           .toolbar-header-buttons {
+            display: flex;
+            justify-content: space-between;
             opacity: 0;
             position: absolute;
             right: 60px;
@@ -236,6 +238,8 @@
             background-color: #8ae0ff;
             color: #004f6b;
             .toolbar-header-buttons {
+              display: flex;
+              justify-content: space-between;
               opacity: 1;
               position: absolute;
               right: 30px;
