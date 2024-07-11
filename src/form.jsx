@@ -543,7 +543,7 @@ class ReactForm extends React.Component {
             )}
             {items}
             <div className="btn-toolbar">
-              {/* {!this.props.hide_actions && this.handleRenderSubmit()} */}
+              {!this.props.hide_actions && this.handleRenderSubmit()}
               {!this.props.hide_actions &&
                 this.props.back_action &&
                 this.handleRenderBack()}
