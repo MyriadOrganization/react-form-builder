@@ -302,7 +302,7 @@ class ReactForm extends React.Component {
       <Input
         handleChange={this.handleChange}
         ref={(c) => (this.inputs[item.field_name] = c)}
-        mutable={true}
+        mutable={false}
         key={`form_${item.id}`}
         data={item}
         read_only={this.props.read_only}
@@ -317,7 +317,7 @@ class ReactForm extends React.Component {
     );
     return (
       <Element
-        mutable={true}
+        mutable={false}
         key={`form_${item.id}`}
         data={item}
         controls={controls}
@@ -330,7 +330,7 @@ class ReactForm extends React.Component {
     const Element = FormElements[item.element];
     return (
       <Element
-        mutable={true}
+        mutable={false}
         key={`form_${item.id}`}
         data={item}
         handleChange={this.handleChange}
@@ -359,7 +359,7 @@ class ReactForm extends React.Component {
     };
     return (
       <CustomElement
-        mutable={true}
+        mutable={false}
         read_only={this.props.read_only}
         key={`form_${item.id}`}
         data={item}
@@ -446,7 +446,7 @@ class ReactForm extends React.Component {
               <Signature
                 ref={(c) => (this.inputs[item.field_name] = c)}
                 read_only={this.props.read_only || item.readOnly}
-                mutable={true}
+                mutable={false}
                 key={`form_${item.id}`}
                 data={item}
                 defaultValue={this._getDefaultValue(item)}
@@ -459,7 +459,7 @@ class ReactForm extends React.Component {
                 ref={(c) => (this.inputs[item.field_name] = c)}
                 read_only={this.props.read_only}
                 handleChange={this.handleChange}
-                mutable={true}
+                mutable={false}
                 key={`form_${item.id}`}
                 data={item}
                 defaultValue={this._optionsDefaultValue(item)}
@@ -470,7 +470,7 @@ class ReactForm extends React.Component {
               <Image
                 ref={(c) => (this.inputs[item.field_name] = c)}
                 handleChange={this.handleChange}
-                mutable={true}
+                mutable={false}
                 key={`form_${item.id}`}
                 data={item}
                 defaultValue={this._getDefaultValue(item)}
@@ -480,7 +480,7 @@ class ReactForm extends React.Component {
             return (
               <Download
                 download_path={this.props.download_path}
-                mutable={true}
+                mutable={false}
                 key={`form_${item.id}`}
                 data={item}
               />
@@ -490,7 +490,7 @@ class ReactForm extends React.Component {
               <Camera
                 ref={(c) => (this.inputs[item.field_name] = c)}
                 read_only={this.props.read_only || item.readOnly}
-                mutable={true}
+                mutable={false}
                 key={`form_${item.id}`}
                 data={item}
                 defaultValue={this._getDefaultValue(item)}
@@ -501,7 +501,7 @@ class ReactForm extends React.Component {
               <FileUpload
                 ref={(c) => (this.inputs[item.field_name] = c)}
                 read_only={this.props.read_only || item.readOnly}
-                mutable={true}
+                mutable={false}
                 key={`form_${item.id}`}
                 data={item}
                 defaultValue={this._getDefaultValue(item)}
