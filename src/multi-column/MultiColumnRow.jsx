@@ -32,7 +32,7 @@ class MultiColumnRow extends React.Component {
         <ComponentHeader {...this.props} />
         <div>
           <ComponentLabel {...this.props} />
-          <div className="row">
+          <div className="row four-column">
             {childItems.map((x, i) => (
               <div
                 key={`${i}_${x || "_"}`}
@@ -65,7 +65,7 @@ class MultiColumnRow extends React.Component {
 }
 
 const TwoColumnRow = ({ data, class_name, ...rest }) => {
-  const className = [class_name || "col-md-6"];
+  const className = [class_name || "two-column"];
   if (!data.childItems) {
     // eslint-disable-next-line no-param-reassign
     data.childItems = [null, null];
@@ -75,7 +75,7 @@ const TwoColumnRow = ({ data, class_name, ...rest }) => {
 };
 
 const ThreeColumnRow = ({ data, class_name, ...rest }) => {
-  const className = class_name || "col-md-4";
+  const className = class_name || "three-column";
   if (!data.childItems) {
     // eslint-disable-next-line no-param-reassign
     data.childItems = [null, null, null];
@@ -85,7 +85,7 @@ const ThreeColumnRow = ({ data, class_name, ...rest }) => {
 };
 
 const FourColumnRow = ({ data, class_name, ...rest }) => {
-  const className = class_name || "col-md-3";
+  const className = class_name;
   if (!data.childItems) {
     // eslint-disable-next-line no-param-reassign
     data.childItems = [null, null, null, null];
