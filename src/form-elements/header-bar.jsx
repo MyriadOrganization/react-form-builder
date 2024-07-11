@@ -17,7 +17,7 @@ export default class HeaderBar extends React.Component {
             {this.props.data.element !== "LineBreak" && (
               <div
                 className="btn is-isolated"
-                onClick={this.props.editModeOn.bind(
+                onClick={this.props.editModeOn?.bind(
                   this.props.parent,
                   this.props.data
                 )}
@@ -27,7 +27,7 @@ export default class HeaderBar extends React.Component {
             )}
             <div
               className="btn is-isolated"
-              onClick={this.props.onDestroy.bind(this, this.props.data)}
+              onClick={this.props.onDestroy?.bind(this, this.props.data)}
             >
               <svg
                 width="20"
