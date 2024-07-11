@@ -75,7 +75,7 @@ class MultiColumnRow extends React.Component {
 }
 
 const TwoColumnRow = ({ data, class_name, ...rest }) => {
-  const className = [class_name || "two-column"];
+  const className = [class_name || "col-md-6"];
   if (!data.childItems) {
     // eslint-disable-next-line no-param-reassign
     data.childItems = [null, null];
@@ -85,7 +85,7 @@ const TwoColumnRow = ({ data, class_name, ...rest }) => {
 };
 
 const ThreeColumnRow = ({ data, class_name, ...rest }) => {
-  const className = class_name || "three-column";
+  const className = class_name || "col-md-4";
   if (!data.childItems) {
     // eslint-disable-next-line no-param-reassign
     data.childItems = [null, null, null];
@@ -95,7 +95,7 @@ const ThreeColumnRow = ({ data, class_name, ...rest }) => {
 };
 
 const FourColumnRow = ({ data, class_name, ...rest }) => {
-  const className = class_name;
+  const className = class_name || "col-md-3";
   if (!data.childItems) {
     // eslint-disable-next-line no-param-reassign
     data.childItems = [null, null, null, null];
