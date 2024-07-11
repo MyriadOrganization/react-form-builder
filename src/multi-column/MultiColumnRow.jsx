@@ -32,7 +32,17 @@ class MultiColumnRow extends React.Component {
         <ComponentHeader {...this.props} />
         <div>
           <ComponentLabel {...this.props} />
-          <div className="row four-column">
+          <div
+            className={`row ${
+              childItems.length === 4
+                ? "four-column"
+                : childItems.length === 3
+                ? "three-column"
+                : childItems.length === 2
+                ? "two-column"
+                : ""
+            }`}
+          >
             {childItems.map((x, i) => (
               <div
                 key={`${i}_${x || "_"}`}
