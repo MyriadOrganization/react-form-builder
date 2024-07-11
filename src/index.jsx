@@ -12,6 +12,7 @@ import FormGenerator from './form';
 import store from './stores/store';
 import Registry from './stores/registry';
 import AppLocale from './language-provider';
+import './bootstrap.min.css'
 
 class ReactFormBuilder extends React.Component {
   constructor(props) {
