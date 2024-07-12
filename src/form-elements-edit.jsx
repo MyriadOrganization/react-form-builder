@@ -805,6 +805,12 @@ export default class FormElementsEdit extends React.Component {
             key={this.props.element.options.length}
           />
         )}
+        <button
+          onClick={this.props.manualEditModeOff}
+          className="btn btn-success"
+        >
+          SAVE
+        </button>
       </div>
     );
   }

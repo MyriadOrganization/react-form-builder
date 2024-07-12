@@ -14,17 +14,18 @@ export default class HeaderBar extends React.Component {
         <span className="">{this.props.data.text}</span>
         <div className="toolbar-header-buttons-container">
           <div className="toolbar-header-buttons">
-            {this.props.data.element !== "LineBreak" && (
-              <div
-                className="btn is-isolated"
-                onClick={this.props.editModeOn.bind(
-                  this.props.parent,
-                  this.props.data
-                )}
-              >
-                <Icon icon="edit-3" />
-              </div>
-            )}
+            {this.props.data.element !== "LineBreak" &&
+              this.props.data.element !== "CustomElement" && (
+                <div
+                  className="btn is-isolated"
+                  onClick={this.props.editModeOn.bind(
+                    this.props.parent,
+                    this.props.data
+                  )}
+                >
+                  <Icon icon="edit-3" />
+                </div>
+              )}
             <div
               className="btn is-isolated"
               onClick={this.props.onDestroy.bind(this, this.props.data)}
