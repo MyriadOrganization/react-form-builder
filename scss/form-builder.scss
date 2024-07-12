@@ -232,7 +232,7 @@
             opacity: 0;
             position: absolute;
             right: 60px;
-            margin-right: 10px;
+            margin-right: 5px;
           }
           &:hover {
             background-color: #8ae0ff;
@@ -575,6 +575,9 @@
   font-size: 14px;
   font-family: "Plus Jakarta Sans";
   font-weight: 400;
+}
+.shared-input:not(:empty) {
+  border: none !important;
 }
 .dropdown {
   padding-right: 10px !important;
