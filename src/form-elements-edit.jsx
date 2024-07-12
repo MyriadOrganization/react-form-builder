@@ -13,6 +13,7 @@ import DynamicOptionList from "./dynamic-option-list";
 import { get } from "./stores/requests";
 import ID from "./UUID";
 import IntlMessages from "./language-provider/IntlMessages";
+import Icon from "./Icons/Icon";
 
 const toolbar = {
   options: ["inline", "list", "textAlign", "fontSize", "link", "history"],
@@ -194,10 +195,12 @@ export default class FormElementsEdit extends React.Component {
       <div>
         <div className="clearfix">
           <h4 className="float-left">{this.props.element.text}</h4>
-          <i
-            className="float-right fas fa-times dismiss-edit"
+          <div
+            className="float-right close-icon"
             onClick={this.props.manualEditModeOff}
-          ></i>
+          >
+            <Icon icon="close" />
+          </div>
         </div>
         {this.props.element.hasOwnProperty("content") && (
           <div className="form-group">
