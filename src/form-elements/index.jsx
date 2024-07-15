@@ -238,6 +238,26 @@ class TextArea extends React.Component {
     this.inputField = React.createRef();
   }
 
+  componentDidMount() {
+    this.updateTextareaHeight();
+  }
+
+  componentDidUpdate() {
+    this.updateTextareaHeight();
+  }
+
+  updateTextareaHeight = () => {
+    const textarea = this.inputField.current;
+    textarea.style.height = textarea.scrollHeight + "px"; // Set the height based on content
+  };
+
+  handleChange = (e) => {
+    this.updateTextareaHeight();
+    if (this.props.onChange) {
+      this.props.onChange(e);
+    }
+  };
+
   render() {
     const props = {};
     props.className = "form-control shared-input";
