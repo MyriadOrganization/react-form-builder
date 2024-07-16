@@ -250,8 +250,8 @@ class TextArea extends React.Component {
     const textarea = this.inputField.current;
     if (textarea && textarea.value.length > 0) {
       textarea.style.height = "";
-      textarea.style.height = textarea.scrollHeight + "px"; // Set the height based on content
     }
+    textarea.style.height = textarea.scrollHeight + "px"; // Set the height based on content
   };
 
   handleChange = (e) => {
@@ -273,7 +273,7 @@ class TextArea extends React.Component {
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
       props.ref = this.inputField;
-      props.onChange = this.handleChange;
+      props.onChange = this.props.handleChange;
     }
 
     let baseClasses = "SortableItem rfb-item";
