@@ -13,6 +13,8 @@ import store from "./stores/store";
 import Registry from "./stores/registry";
 import AppLocale from "./language-provider";
 import "./bootstrap.scss";
+import "./font-awesome.scss";
+
 class ReactFormBuilder extends React.Component {
   constructor(props) {
     super(props);

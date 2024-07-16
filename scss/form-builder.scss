@@ -575,6 +575,7 @@
   font-size: 14px;
   font-family: "Plus Jakarta Sans";
   font-weight: 400;
+  min-width: unset !important;
 }
 .shared-input:not(:empty) {
   border: none !important;
@@ -590,18 +591,17 @@
 .two-column {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  margin: auto;
+  gap: 16px;
 }
 .three-column {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin: auto;
+  gap: 16px;
 }
 .four-column {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: auto;
-  gap: 1px;
+  gap: 16px;
 }
 .close-icon {
   cursor: pointer;

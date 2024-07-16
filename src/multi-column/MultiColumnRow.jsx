@@ -33,7 +33,7 @@ class MultiColumnRow extends React.Component {
         <div>
           <ComponentLabel {...this.props} />
           <div
-            className={`row ${
+            className={
               childItems.length === 4
                 ? "four-column"
                 : childItems.length === 3
@@ -41,13 +41,10 @@ class MultiColumnRow extends React.Component {
                 : childItems.length === 2
                 ? "two-column"
                 : ""
-            }`}
+            }
           >
             {childItems.map((x, i) => (
-              <div
-                key={`${i}_${x || "_"}`}
-                className={`${className} shared-input`}
-              >
+              <div key={`${i}_${x || "_"}`} className="shared-input">
                 {controls ? (
                   controls[i]
                 ) : (
@@ -75,33 +72,30 @@ class MultiColumnRow extends React.Component {
 }
 
 const TwoColumnRow = ({ data, class_name, ...rest }) => {
-  const className = [class_name || "col-md-6"];
   if (!data.childItems) {
     // eslint-disable-next-line no-param-reassign
     data.childItems = [null, null];
     data.isContainer = true;
   }
-  return <MultiColumnRow {...rest} className={className} data={data} />;
+  return <MultiColumnRow {...rest} data={data} />;
 };
 
 const ThreeColumnRow = ({ data, class_name, ...rest }) => {
-  const className = class_name || "col-md-4";
   if (!data.childItems) {
     // eslint-disable-next-line no-param-reassign
     data.childItems = [null, null, null];
     data.isContainer = true;
   }
-  return <MultiColumnRow {...rest} className={className} data={data} />;
+  return <MultiColumnRow {...rest} data={data} />;
 };
 
 const FourColumnRow = ({ data, class_name, ...rest }) => {
-  const className = class_name || "col-md-3";
   if (!data.childItems) {
     // eslint-disable-next-line no-param-reassign
     data.childItems = [null, null, null, null];
     data.isContainer = true;
   }
-  return <MultiColumnRow {...rest} className={className} data={data} />;
+  return <MultiColumnRow {...rest} data={data} />;
 };
 
 export { TwoColumnRow, ThreeColumnRow, FourColumnRow };
