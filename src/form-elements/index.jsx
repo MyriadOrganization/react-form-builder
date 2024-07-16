@@ -251,6 +251,7 @@ class TextArea extends React.Component {
     if (textarea && textarea.value.length > 0) {
       textarea.style.height = "";
     }
+
     textarea.style.height = textarea.scrollHeight + "px"; // Set the height based on content
   };
 
