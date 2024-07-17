@@ -603,6 +603,13 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 }
+@media (max-width: 768px) {
+  .two-column,
+  .three-column,
+  .four-column {
+    grid-template-columns: 1fr;
+  }
+}
 .close-icon {
   cursor: pointer;
 }
