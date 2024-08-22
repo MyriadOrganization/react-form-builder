@@ -241,7 +241,7 @@ class ReactForm extends React.Component {
       data_items = this.props.data.filter((i) => i.alternateForm === true);
     }
 
-    data_items.forEach((item) => {
+    data_items?.forEach((item) => {
       if (item.element === "Signature") {
         this._getSignatureImg(item);
       }
@@ -405,7 +405,7 @@ class ReactForm extends React.Component {
       data_items = this.props.data.filter((i) => i.alternateForm === true);
     }
 
-    data_items.forEach((item) => {
+    data_items?.forEach((item) => {
       if (
         item &&
         item.readOnly &&
