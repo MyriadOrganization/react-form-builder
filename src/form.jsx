@@ -418,8 +418,8 @@ class ReactForm extends React.Component {
     });
 
     const items = data_items
-      .filter((x) => !x.parentId)
-      .map((item) => {
+      ?.filter((x) => !x.parentId)
+      ?.map((item) => {
         if (!item) return null;
         switch (item.element) {
           case "TextInput":
