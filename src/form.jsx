@@ -180,7 +180,7 @@ class ReactForm extends React.Component {
 
   _collectFormData(data) {
     const formData = [];
-    data.forEach((item) => {
+    data?.forEach((item) => {
       const item_data = this._collect(item);
       if (item_data) {
         formData.push(item_data);
