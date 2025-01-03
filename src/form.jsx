@@ -229,8 +229,9 @@ class ReactForm extends React.Component {
   }
 
   handleChange = (evt) => {
-    const data = this._collectFormData(this.props.data);
-    this.props.onChange && this.props.onChange(evt, whole_response);
+    const whole_form_response = this._collectFormData(this.props.data);
+    console.log({ whole_form_response });
+    this.props.onChange && this.props.onChange(evt, whole_form_response);
   };
 
   validateForm() {
