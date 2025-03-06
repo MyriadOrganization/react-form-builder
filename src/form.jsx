@@ -166,7 +166,11 @@ class ReactForm extends React.Component {
       custom_name: item.custom_name || item.field_name,
     };
     if (!itemData.name) return null;
+
+    console.log({item})
     const ref = this.inputs[item.field_name];
+
+    console.log({ref})
     if (item.element === "Checkboxes" || item.element === "RadioButtons") {
       const checked_options = [];
       item?.options?.forEach((option) => {
@@ -189,6 +193,7 @@ class ReactForm extends React.Component {
     const formData = [];
     data?.forEach((item) => {
       const item_data = this._collect(item, shouldTrim);
+      console.log({item_data})
       if (item_data) {
         formData.push(item_data);
       }
@@ -236,6 +241,7 @@ class ReactForm extends React.Component {
   }
 
   handleChange = (evt) => {
+    console.log({ evt })
     const whole_response = this._collectFormData(this.props.data, false);
     console.log({ whole_response })
     this.props.onChange && this.props.onChange(evt, whole_response);

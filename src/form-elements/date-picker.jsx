@@ -1,5 +1,5 @@
-import React from "react";
 import { format, parse } from "date-fns";
+import React from "react";
 import ReactDatePicker from "react-datepicker";
 import ComponentHeader from "./component-header";
 import ComponentLabel from "./component-label";
@@ -15,41 +15,93 @@ class DatePicker extends React.Component {
 
   // formatMask = '';
 
+  // handleChange = (dt) => {
+  //   let placeholder;
+  //   const { formatMask } = this.state;
+  //   let formattedDate = "";
+  //   if (dt && dt.target) {
+  //     placeholder =
+  //       dt && dt.target && dt.target.value === ""
+  //         ? formatMask.toLowerCase()
+  //         : "";
+  //     const formattedDate = dt.target.value
+  //       ? format(dt.target.value, formatMask)
+  //       : "";
+  //     this.setState({
+  //       value: formattedDate,
+  //       internalValue: formattedDate,
+  //       placeholder,
+  //     });
+  //   } else {
+  //     formattedDate = dt ? format(dt, formatMask) : "";
+  //     this.setState({
+  //       value: formattedDate,
+  //       internalValue: dt,
+  //       placeholder,
+  //     });
+  //   }
+
+  //   const event = {
+  //     target: {
+  //       name: this.props.data.field_name,
+  //       value: formattedDate,
+  //     },
+  //   };
+
+  //   this.props.handleChange(event);
+  // };
   handleChange = (dt) => {
-    let placeholder;
-    const { formatMask } = this.state;
-    let formattedDate = "";
-    if (dt && dt.target) {
-      placeholder =
-        dt && dt.target && dt.target.value === ""
-          ? formatMask.toLowerCase()
-          : "";
-      const formattedDate = dt.target.value
-        ? format(dt.target.value, formatMask)
-        : "";
-      this.setState({
+  let placeholder;
+  const { formatMask } = this.state;
+  let formattedDate = "";
+  
+  if (dt && dt.target) {
+    placeholder = dt && dt.target && dt.target.value === "" 
+      ? formatMask.toLowerCase() 
+      : "";
+    formattedDate = dt.target.value
+      ? format(dt.target.value, formatMask)
+      : "";
+    
+    this.setState(
+      {
         value: formattedDate,
         internalValue: formattedDate,
         placeholder,
-      });
-    } else {
-      formattedDate = dt ? format(dt, formatMask) : "";
-      this.setState({
+      },
+      () => {
+        // This callback runs after state is actually updated
+        const event = {
+          target: {
+            name: this.props.data.field_name,
+            value: this.state.value, // Use the updated state
+          },
+        };
+        this.props.handleChange(event);
+      }
+    );
+  } else {
+    formattedDate = dt ? format(dt, formatMask) : "";
+    
+    this.setState(
+      {
         value: formattedDate,
         internalValue: dt,
         placeholder,
-      });
-    }
-
-    const event = {
-      target: {
-        name: this.props.data.field_name,
-        value: formattedDate,
       },
-    };
-
-    this.props.handleChange(event);
-  };
+      () => {
+        // This callback runs after state is actually updated
+        const event = {
+          target: {
+            name: this.props.data.field_name,
+            value: this.state.value, // Use the updated state
+          },
+        };
+        this.props.handleChange(event);
+      }
+    );
+  }
+};
 
   static updateFormat(props, oldFormatMask) {
     const { showTimeSelect, showTimeSelectOnly, showTimeInput } = props.data;
