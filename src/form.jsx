@@ -2,14 +2,14 @@
  * <Form />
  */
 
+import { EventEmitter } from "fbemitter";
 import React from "react";
 import ReactDOM from "react-dom";
-import { EventEmitter } from "fbemitter";
 import { injectIntl } from "react-intl";
-import FormValidator from "./form-validator";
 import FormElements from "./form-elements";
-import { TwoColumnRow, ThreeColumnRow, FourColumnRow } from "./multi-column";
 import CustomElement from "./form-elements/custom-element";
+import FormValidator from "./form-validator";
+import { FourColumnRow, ThreeColumnRow, TwoColumnRow } from "./multi-column";
 import Registry from "./stores/registry";
 
 const { Image, Checkboxes, Signature, Download, Camera, FileUpload } =
@@ -63,11 +63,12 @@ class ReactForm extends React.Component {
     return defaultChecked;
   }
 
-  _getItemValue(item, ref) {
+  _getItemValue(item, ref, shouldTrim = true) {
     let $item = {
       element: item.element,
       value: "",
     };
+    
     if (item.element === "Rating") {
       $item.value = ref.inputField.current.state.rating;
     } else if (item.element === "Tags") {
@@ -83,7 +84,11 @@ class ReactForm extends React.Component {
     } else if (ref && ref.inputField && ref.inputField.current) {
       $item = ReactDOM.findDOMNode(ref.inputField.current);
       if ($item && typeof $item.value === "string") {
-        $item.value = $item.value.trim();
+        if(shouldTrim) {
+          $item.value = $item.value.trim();
+        } else {
+          $item.value = $item.value;
+        }
       }
     }
     return $item;
@@ -153,13 +158,15 @@ class ReactForm extends React.Component {
     return invalid;
   }
 
-  _collect(item) {
+  _collect(item, shouldTrim = true) {
     const itemData = {
       name: item.field_name,
       custom_name: item.custom_name || item.field_name,
     };
     if (!itemData.name) return null;
+
     const ref = this.inputs[item.field_name];
+
     if (item.element === "Checkboxes" || item.element === "RadioButtons") {
       const checked_options = [];
       item?.options?.forEach((option) => {
@@ -173,15 +180,15 @@ class ReactForm extends React.Component {
       itemData.value = checked_options;
     } else {
       if (!ref) return null;
-      itemData.value = this._getItemValue(item, ref).value;
+      itemData.value = this._getItemValue(item, ref, shouldTrim).value;
     }
     return itemData;
   }
 
-  _collectFormData(data) {
+  _collectFormData(data, shouldTrim = true) {
     const formData = [];
     data?.forEach((item) => {
-      const item_data = this._collect(item);
+      const item_data = this._collect(item, shouldTrim);
       if (item_data) {
         formData.push(item_data);
       }
@@ -229,7 +236,8 @@ class ReactForm extends React.Component {
   }
 
   handleChange = (evt) => {
-    this.props.onChange && this.props.onChange(evt);
+    const whole_response = this._collectFormData(this.props.data, false);
+    this.props.onChange && this.props.onChange(evt, whole_response);
   };
 
   validateForm() {
