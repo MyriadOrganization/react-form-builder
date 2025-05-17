@@ -252,7 +252,7 @@ class TextArea extends React.Component {
       if (textarea.value.length > 0) {
         textarea.style.height = "";
       }
-      textarea.style.height = textarea.scrollHeight + "px"; // Set the height based on content
+      textarea.style.height = `${textarea.scrollHeight}px`; // Set the height based on content
     }
   };
 
@@ -267,6 +267,7 @@ class TextArea extends React.Component {
     const props = {};
     props.className = "form-control shared-input";
     props.name = this.props.data.field_name;
+    console.log(this.props);
 
     if (this.props.read_only) {
       props.disabled = "disabled";
