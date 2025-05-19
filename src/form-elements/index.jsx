@@ -267,7 +267,6 @@ class TextArea extends React.Component {
     const props = {};
     props.className = "form-control shared-input";
     props.name = this.props.data.field_name;
-    console.log(this.props);
 
     if (this.props.read_only) {
       props.disabled = "disabled";
