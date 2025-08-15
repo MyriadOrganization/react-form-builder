@@ -2,12 +2,12 @@
  * <Preview />
  */
 
-import React from "react";
 import update from "immutability-helper";
-import store from "./stores/store";
+import React from "react";
 import FormElementsEdit from "./form-dynamic-edit";
-import SortableFormElements from "./sortable-form-elements";
 import CustomDragLayer from "./form-elements/component-drag-layer";
+import SortableFormElements from "./sortable-form-elements";
+import store from "./stores/store";
 
 const { PlaceHolder } = SortableFormElements;
 
@@ -96,8 +96,8 @@ export default class Preview extends React.Component {
     const answer_data = {};
 
     data.forEach((item) => {
-      if (item && item.readOnly && this.props.variables[item.variableKey]) {
-        answer_data[item.field_name] = this.props.variables[item.variableKey];
+      if (item && item?.readOnly && this?.props?.variables?.[item?.variableKey]) {
+        answer_data[item.field_name] = this?.props?.variables?.[item?.variableKey];
       }
     });
 
