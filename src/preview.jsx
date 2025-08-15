@@ -100,8 +100,8 @@ export default class Preview extends React.Component {
     data.forEach((item) => {
       console.log('onChange', { item }, { itemVariables: item?.variableKey }, { thisProps: this?.props }, { thisPropsVariables: this?.props?.variables?.[item?.variableKey] });
 
-      if (item && item.readOnly && this.props.variables[item.variableKey]) {
-        answer_data[item.field_name] = this.props.variables[item.variableKey];
+      if (item && item?.readOnly && this?.props?.variables?.[item?.variableKey]) {
+        answer_data[item.field_name] = this?.props?.variables?.[item?.variableKey];
       }
     });
 
