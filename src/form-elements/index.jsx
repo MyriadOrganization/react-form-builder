@@ -258,6 +258,7 @@ class TextArea extends React.Component {
 
   updateTextareaHeight = () => {
     const textarea = this.inputField.current;
+    console.log(textarea, 'TEXTAREA')
     if (textarea) {
       if (textarea.value.length > 0) {
         textarea.style.height = "";
