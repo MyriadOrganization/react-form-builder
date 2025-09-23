@@ -258,15 +258,13 @@ class TextArea extends React.Component {
 
   updateTextareaHeight = () => {
     const textarea = this.inputField.current;
-    console.log(textarea?.readOnly, this?.props, 'TEXTAREA');
     if (textarea) {
       if (textarea.value.length > 0) {
         textarea.style.height = "";
       }
 
- // If textarea is readOnly, use the original unlimited expansion behavior
+    // If textarea is readOnly, use the original unlimited expansion behavior
     if (this?.props?.read_only || textarea?.readOnly) {
-      console.log('READONLY')
       textarea.style.height = `${textarea.scrollHeight}px`;
       textarea.style.overflowY = 'hidden';
       return;
