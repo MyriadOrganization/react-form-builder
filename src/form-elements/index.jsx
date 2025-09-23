@@ -263,6 +263,13 @@ class TextArea extends React.Component {
         textarea.style.height = "";
       }
 
+    // If textarea is readOnly, use the original unlimited expansion behavior
+    if (this?.props?.read_only || textarea?.readOnly) {
+      textarea.style.height = `${textarea.scrollHeight}px`;
+      textarea.style.overflowY = 'hidden';
+      return;
+    }
+
       const maxHeight = 700; // Maximum height in pixels
       const scrollHeight = textarea?.scrollHeight;
 
