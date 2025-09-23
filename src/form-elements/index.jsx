@@ -1,16 +1,16 @@
 // eslint-disable-next-line max-classes-per-file
-import fetch from "isomorphic-fetch";
 import { saveAs } from "file-saver";
+import fetch from "isomorphic-fetch";
 import React from "react";
+import ReactBootstrapSlider from "react-bootstrap-slider";
 import Select from "react-select";
 import SignaturePad from "react-signature-canvas";
-import ReactBootstrapSlider from "react-bootstrap-slider";
 
-import StarRating from "./star-rating";
-import DatePicker from "./date-picker";
 import ComponentHeader from "./component-header";
 import ComponentLabel from "./component-label";
+import DatePicker from "./date-picker";
 import myxss from "./myxss";
+import StarRating from "./star-rating";
 
 const FormElements = {};
 
@@ -246,15 +246,37 @@ class TextArea extends React.Component {
     this.updateTextareaHeight();
   }
 
+  // updateTextareaHeight = () => {
+  //   const textarea = this.inputField.current;
+  //   if (textarea) {
+  //     if (textarea.value.length > 0) {
+  //       textarea.style.height = "";
+  //     }
+  //     textarea.style.height = `${textarea.scrollHeight}px`; // Set the height based on content
+  //   }
+  // };
+
   updateTextareaHeight = () => {
     const textarea = this.inputField.current;
     if (textarea) {
       if (textarea.value.length > 0) {
         textarea.style.height = "";
       }
-      textarea.style.height = `${textarea.scrollHeight}px`; // Set the height based on content
+
+      const maxHeight = 700; // Maximum height in pixels
+      const scrollHeight = textarea?.scrollHeight;
+
+      if (scrollHeight <= maxHeight) {
+        // If content fits within max height, expand normally
+        textarea.style.height = `${scrollHeight}px`;
+        textarea.style.overflowY = 'hidden';
+      } else {
+        // If content exceeds max height, set to max and show scrollbar
+        textarea.style.height = `${maxHeight}px`;
+        textarea.style.overflowY = 'auto';
+      }
     }
-  };
+  }
 
   handleChange = (e) => {
     this.updateTextareaHeight();
