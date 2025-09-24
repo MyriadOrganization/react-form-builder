@@ -246,17 +246,44 @@ class TextArea extends React.Component {
     this.updateTextareaHeight();
   }
 
+  // updateTextareaHeight = () => {
+  //   const textarea = this.inputField.current;
+  //   if (textarea) {
+  //     if (textarea.value.length > 0) {
+  //       textarea.style.height = "";
+  //     }
+  //     textarea.style.height = `${textarea.scrollHeight}px`; // Set the height based on content
+  //   }
+  // };
+
   updateTextareaHeight = () => {
     const textarea = this.inputField.current;
     if (textarea) {
       if (textarea.value.length > 0) {
         textarea.style.height = "";
       }
-      if (textarea.style.height <= 500) {
-        textarea.style.height = `${textarea.scrollHeight}px`; // Set the height based on content
+
+    // If textarea is readOnly, use the original unlimited expansion behavior
+    if (this?.props?.read_only || textarea?.readOnly) {
+      textarea.style.height = `${textarea.scrollHeight}px`;
+      textarea.style.overflowY = 'hidden';
+      return;
+    }
+
+      const maxHeight = 700; // Maximum height in pixels
+      const scrollHeight = textarea?.scrollHeight;
+
+      if (scrollHeight <= maxHeight) {
+        // If content fits within max height, expand normally
+        textarea.style.height = `${scrollHeight}px`;
+        textarea.style.overflowY = 'hidden';
+      } else {
+        // If content exceeds max height, set to max and show scrollbar
+        textarea.style.height = `${maxHeight}px`;
+        textarea.style.overflowY = 'auto';
       }
     }
-  };
+  }
 
   handleChange = (e) => {
     this.updateTextareaHeight();
@@ -285,18 +312,12 @@ class TextArea extends React.Component {
       baseClasses += " alwaysbreak";
     }
 
-    const style = {
-      ...this.props.style,
-      maxHeight: "500px",
-      resize: "none",
-    };
-
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
         <div className="form-group">
           <ComponentLabel {...this.props} />
-          <textarea {...props} style={style} />
+          <textarea {...props} />
         </div>
       </div>
     );
