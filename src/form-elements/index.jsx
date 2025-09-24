@@ -257,32 +257,32 @@ class TextArea extends React.Component {
   // };
 
   updateTextareaHeight = () => {
-    const textarea = this.inputField.current;
-    if (textarea) {
-      if (textarea.value.length > 0) {
-        textarea.style.height = "";
-      }
+    // const textarea = this.inputField.current;
+    // if (textarea) {
+    //   if (textarea.value.length > 0) {
+    //     textarea.style.height = "";
+    //   }
 
-    // If textarea is readOnly, use the original unlimited expansion behavior
-    if (this?.props?.read_only || textarea?.readOnly) {
-      textarea.style.height = `${textarea.scrollHeight}px`;
-      textarea.style.overflowY = 'hidden';
-      return;
-    }
+    // // If textarea is readOnly, use the original unlimited expansion behavior
+    // if (this?.props?.read_only || textarea?.readOnly) {
+    //   textarea.style.height = `${textarea.scrollHeight}px`;
+    //   textarea.style.overflowY = 'hidden';
+    //   return;
+    // }
 
-      const maxHeight = 700; // Maximum height in pixels
-      const scrollHeight = textarea?.scrollHeight;
+    //   const maxHeight = 700; // Maximum height in pixels
+    //   const scrollHeight = textarea?.scrollHeight;
 
-      if (scrollHeight <= maxHeight) {
-        // If content fits within max height, expand normally
-        textarea.style.height = `${scrollHeight}px`;
-        textarea.style.overflowY = 'hidden';
-      } else {
-        // If content exceeds max height, set to max and show scrollbar
-        textarea.style.height = `${maxHeight}px`;
-        textarea.style.overflowY = 'auto';
-      }
-    }
+    //   if (scrollHeight <= maxHeight) {
+    //     // If content fits within max height, expand normally
+    //     textarea.style.height = `${scrollHeight}px`;
+    //     textarea.style.overflowY = 'hidden';
+    //   } else {
+    //     // If content exceeds max height, set to max and show scrollbar
+    //     textarea.style.height = `${maxHeight}px`;
+    //     textarea.style.overflowY = 'auto';
+    //   }
+    // }
   }
 
   handleChange = (e) => {
@@ -294,7 +294,7 @@ class TextArea extends React.Component {
 
   render() {
     const props = {};
-    props.className = "form-control shared-input";
+    props.className = "form-control shared-input RASIM";
     props.name = this.props.data.field_name;
 
     if (this.props.read_only) {
@@ -317,7 +317,7 @@ class TextArea extends React.Component {
         <ComponentHeader {...this.props} />
         <div className="form-group">
           <ComponentLabel {...this.props} />
-          <textarea {...props} />
+          <textarea {...props} style={{ resize: 'none' }} />
         </div>
       </div>
     );
