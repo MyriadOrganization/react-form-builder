@@ -246,44 +246,44 @@ class TextArea extends React.Component {
     this.updateTextareaHeight();
   }
 
-  // updateTextareaHeight = () => {
-  //   const textarea = this.inputField.current;
-  //   if (textarea) {
-  //     if (textarea.value.length > 0) {
-  //       textarea.style.height = "";
-  //     }
-  //     textarea.style.height = `${textarea.scrollHeight}px`; // Set the height based on content
-  //   }
-  // };
-
   updateTextareaHeight = () => {
     const textarea = this.inputField.current;
     if (textarea) {
       if (textarea.value.length > 0) {
         textarea.style.height = "";
       }
-
-    // If textarea is readOnly, use the original unlimited expansion behavior
-    if (this?.props?.read_only || textarea?.readOnly) {
-      textarea.style.height = `${textarea.scrollHeight}px`;
-      textarea.style.overflowY = 'hidden';
-      return;
+      textarea.style.height = `${textarea.scrollHeight}px`; // Set the height based on content
     }
+  };
 
-      const maxHeight = 700; // Maximum height in pixels
-      const scrollHeight = textarea?.scrollHeight;
+  // updateTextareaHeight = () => {
+  //   const textarea = this.inputField.current;
+  //   if (textarea) {
+  //     if (textarea.value.length > 0) {
+  //       textarea.style.height = "";
+  //     }
 
-      if (scrollHeight <= maxHeight) {
-        // If content fits within max height, expand normally
-        textarea.style.height = `${scrollHeight}px`;
-        textarea.style.overflowY = 'hidden';
-      } else {
-        // If content exceeds max height, set to max and show scrollbar
-        textarea.style.height = `${maxHeight}px`;
-        textarea.style.overflowY = 'auto';
-      }
-    }
-  }
+  //   // If textarea is readOnly, use the original unlimited expansion behavior
+  //   if (this?.props?.read_only || textarea?.readOnly) {
+  //     textarea.style.height = `${textarea.scrollHeight}px`;
+  //     textarea.style.overflowY = 'hidden';
+  //     return;
+  //   }
+
+  //     const maxHeight = 700; // Maximum height in pixels
+  //     const scrollHeight = textarea?.scrollHeight;
+
+  //     if (scrollHeight <= maxHeight) {
+  //       // If content fits within max height, expand normally
+  //       textarea.style.height = `${scrollHeight}px`;
+  //       textarea.style.overflowY = 'hidden';
+  //     } else {
+  //       // If content exceeds max height, set to max and show scrollbar
+  //       textarea.style.height = `${maxHeight}px`;
+  //       textarea.style.overflowY = 'auto';
+  //     }
+  //   }
+  // }
 
   handleChange = (e) => {
     this.updateTextareaHeight();
