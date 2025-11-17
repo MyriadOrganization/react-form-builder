@@ -247,13 +247,13 @@ class TextArea extends React.Component {
   }
 
   updateTextareaHeight = () => {
-    const textarea = this.inputField.current;
-    if (textarea) {
-      if (textarea.value.length > 0) {
-        textarea.style.height = "";
-      }
-      textarea.style.height = `${textarea.scrollHeight}px`; // Set the height based on content
-    }
+    // const textarea = this.inputField.current;
+    // if (textarea) {
+    //   if (textarea.value.length > 0) {
+    //     textarea.style.height = "";
+    //   }
+    //   textarea.style.height = `${textarea.scrollHeight}px`; // Set the height based on content
+    // }
   };
 
   // updateTextareaHeight = () => {
