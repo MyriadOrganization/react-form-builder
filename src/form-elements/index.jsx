@@ -263,12 +263,12 @@ class TextArea extends React.Component {
         textarea.style.height = "";
       }
 
-    // If textarea is readOnly, use the original unlimited expansion behavior
-    if (this?.props?.read_only || textarea?.readOnly) {
-      textarea.style.height = `${textarea.scrollHeight}px`;
-      textarea.style.overflowY = 'hidden';
-      return;
-    }
+      // If textarea is readOnly, use the original unlimited expansion behavior
+      if (this?.props?.read_only || textarea?.readOnly) {
+        textarea.style.height = `${textarea.scrollHeight}px`;
+        textarea.style.overflowY = "hidden";
+        return;
+      }
 
       const maxHeight = 700; // Maximum height in pixels
       const scrollHeight = textarea?.scrollHeight;
@@ -276,14 +276,14 @@ class TextArea extends React.Component {
       if (scrollHeight <= maxHeight) {
         // If content fits within max height, expand normally
         textarea.style.height = `${scrollHeight}px`;
-        textarea.style.overflowY = 'hidden';
+        textarea.style.overflowY = "hidden";
       } else {
         // If content exceeds max height, set to max and show scrollbar
         textarea.style.height = `${maxHeight}px`;
-        textarea.style.overflowY = 'auto';
+        textarea.style.overflowY = "auto";
       }
     }
-  }
+  };
 
   handleChange = (e) => {
     this.updateTextareaHeight();
@@ -968,10 +968,10 @@ class FileUpload extends React.Component {
                     <div style={{ display: "inline-block", marginLeft: "5px" }}>
                       {this.state.fileUpload.size.length > 6
                         ? `Size:  ${Math.ceil(
-                            this.state.fileUpload.size / (1024 * 1024)
+                            this.state.fileUpload.size / (1024 * 1024),
                           )} mb`
                         : `Size:  ${Math.ceil(
-                            this.state.fileUpload.size / 1024
+                            this.state.fileUpload.size / 1024,
                           )} kb`}
                     </div>
                   </div>
