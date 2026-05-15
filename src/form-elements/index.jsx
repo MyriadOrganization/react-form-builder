@@ -304,7 +304,10 @@ class TextArea extends React.Component {
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
       props.ref = this.inputField;
-      props.onChange = this.props.handleChange;
+      props.onChange = (e) => {
+        this.updateTextareaHeight();
+        if (this.props.handleChange) this.props.handleChange(e);
+      };
     }
 
     let baseClasses = "SortableItem rfb-item";
