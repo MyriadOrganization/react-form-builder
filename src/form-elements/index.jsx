@@ -5,6 +5,7 @@ import React from "react";
 import ReactBootstrapSlider from "react-bootstrap-slider";
 import Select from "react-select";
 import SignaturePad from "react-signature-canvas";
+import TextareaAutosize from "react-textarea-autosize";
 
 import ComponentHeader from "./component-header";
 import ComponentLabel from "./component-label";
@@ -238,60 +239,6 @@ class TextArea extends React.Component {
     this.inputField = React.createRef();
   }
 
-  componentDidMount() {
-    this.updateTextareaHeight();
-  }
-
-  componentDidUpdate() {
-    this.updateTextareaHeight();
-  }
-
-  // updateTextareaHeight = () => {
-  //   const textarea = this.inputField.current;
-  //   if (textarea) {
-  //     if (textarea.value.length > 0) {
-  //       textarea.style.height = "";
-  //     }
-  //     textarea.style.height = `${textarea.scrollHeight}px`; // Set the height based on content
-  //   }
-  // };
-
-  updateTextareaHeight = () => {
-    const textarea = this.inputField.current;
-    if (textarea) {
-      if (textarea.value.length > 0) {
-        textarea.style.height = "";
-      }
-
-    // If textarea is readOnly, use the original unlimited expansion behavior
-    if (this?.props?.read_only || textarea?.readOnly) {
-      textarea.style.height = `${textarea.scrollHeight}px`;
-      textarea.style.overflowY = 'hidden';
-      return;
-    }
-
-      const maxHeight = 700; // Maximum height in pixels
-      const scrollHeight = textarea?.scrollHeight;
-
-      if (scrollHeight <= maxHeight) {
-        // If content fits within max height, expand normally
-        textarea.style.height = `${scrollHeight}px`;
-        textarea.style.overflowY = 'hidden';
-      } else {
-        // If content exceeds max height, set to max and show scrollbar
-        textarea.style.height = `${maxHeight}px`;
-        textarea.style.overflowY = 'auto';
-      }
-    }
-  }
-
-  handleChange = (e) => {
-    this.updateTextareaHeight();
-    if (this.props.onChange) {
-      this.props.onChange(e);
-    }
-  };
-
   render() {
     const props = {};
     props.className = "form-control shared-input";
@@ -303,8 +250,12 @@ class TextArea extends React.Component {
 
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
-      props.ref = this.inputField;
+      props.inputRef = this.inputField;
       props.onChange = this.props.handleChange;
+    }
+
+    if (!this.props.read_only) {
+      props.maxRows = 20;
     }
 
     let baseClasses = "SortableItem rfb-item";
@@ -317,7 +268,7 @@ class TextArea extends React.Component {
         <ComponentHeader {...this.props} />
         <div className="form-group">
           <ComponentLabel {...this.props} />
-          <textarea {...props} />
+          <TextareaAutosize {...props} />
         </div>
       </div>
     );
@@ -968,10 +919,10 @@ class FileUpload extends React.Component {
                     <div style={{ display: "inline-block", marginLeft: "5px" }}>
                       {this.state.fileUpload.size.length > 6
                         ? `Size:  ${Math.ceil(
-                            this.state.fileUpload.size / (1024 * 1024)
+                            this.state.fileUpload.size / (1024 * 1024),
                           )} mb`
                         : `Size:  ${Math.ceil(
-                            this.state.fileUpload.size / 1024
+                            this.state.fileUpload.size / 1024,
                           )} kb`}
                     </div>
                   </div>
