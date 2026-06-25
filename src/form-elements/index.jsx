@@ -483,7 +483,10 @@ class Checkboxes extends React.Component {
         <div className="form-group">
           <ComponentLabel className="form-label" {...this.props} />
           {this.props.data.options.map((option) => {
-            const this_key = `preview_${option.key}`;
+            const instancePrefix = this.props.instanceId
+              ? `${this.props.instanceId.replace(/:/g, "")}_`
+              : "";
+            const this_key = `${instancePrefix}preview_${option.key}`;
             const props = {};
             props.name = `option_${option.key}`;
 
@@ -549,9 +552,12 @@ class RadioButtons extends React.Component {
         <div className="form-group">
           <ComponentLabel className="form-label" {...this.props} />
           {this.props.data.options.map((option) => {
-            const this_key = `preview_${option.key}`;
+            const instancePrefix = self.props.instanceId
+              ? `${self.props.instanceId.replace(/:/g, "")}_`
+              : "";
+            const this_key = `${instancePrefix}preview_${option.key}`;
             const props = {};
-            props.name = self.props.data.field_name;
+            props.name = `${instancePrefix}${self.props.data.field_name}`;
 
             props.type = "radio";
             props.value = option.value;

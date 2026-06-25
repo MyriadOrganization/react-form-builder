@@ -103,12 +103,18 @@ class ReactFormBuilder extends React.Component {
 function ReactFormGenerator(props) {
   const language = props.locale ? props.locale : "en";
   const currentAppLocale = AppLocale[language];
+  // Stable, unique-per-mounted-form prefix so element DOM ids (id/htmlFor) and
+  // radio group names don't collide when the same form (or its duplicate, which
+  // shares option keys) is rendered multiple times on one page. Caller may pass
+  // an explicit instanceId to override.
+  const generatedId = React.useId();
+  const instanceId = props.instanceId || generatedId;
   return (
     <IntlProvider
       locale={currentAppLocale.locale}
       messages={currentAppLocale.messages}
     >
-      <FormGenerator {...props} />
+      <FormGenerator {...props} instanceId={instanceId} />
     </IntlProvider>
   );
 }
