@@ -313,6 +313,7 @@ class ReactForm extends React.Component {
         mutable={true}
         key={`form_${item.id}`}
         data={item}
+        instanceId={this.props.instanceId}
         read_only={this.props.read_only}
         defaultValue={this._getDefaultValue(item)}
       />
@@ -470,6 +471,7 @@ class ReactForm extends React.Component {
                 mutable={true}
                 key={`form_${item.id}`}
                 data={item}
+                instanceId={this.props.instanceId}
                 defaultValue={this._optionsDefaultValue(item)}
               />
             );
