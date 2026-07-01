@@ -33,6 +33,10 @@ class ReactForm extends React.Component {
     if (Array.isArray(answers)) {
       const result = {};
       answers.forEach((x) => {
+        console.log({ x });
+        if (!x || typeof x.name !== "string") {
+          return;
+        }
         if (x.name.indexOf("tags_") > -1) {
           result[x.name] = x.value.map((y) => y.value);
         } else {
@@ -68,7 +72,7 @@ class ReactForm extends React.Component {
       element: item.element,
       value: "",
     };
-    
+
     if (item.element === "Rating") {
       $item.value = ref.inputField.current.state.rating;
     } else if (item.element === "Tags") {
@@ -84,7 +88,7 @@ class ReactForm extends React.Component {
     } else if (ref && ref.inputField && ref.inputField.current) {
       $item = ReactDOM.findDOMNode(ref.inputField.current);
       if ($item && typeof $item.value === "string") {
-        if(shouldTrim) {
+        if (shouldTrim) {
           $item.value = $item.value.trim();
         } else {
           $item.value = $item.value;
@@ -101,7 +105,7 @@ class ReactForm extends React.Component {
       if (item.element === "Checkboxes" || item.element === "RadioButtons") {
         item?.options?.forEach((option) => {
           const $option = ReactDOM.findDOMNode(
-            ref?.options?.[`child_ref_${option.key}`]
+            ref?.options?.[`child_ref_${option.key}`],
           );
           if (
             (option?.hasOwnProperty("correct") && !$option?.checked) ||
@@ -134,7 +138,7 @@ class ReactForm extends React.Component {
         let checked_options = 0;
         item?.options?.forEach((option) => {
           const $option = ReactDOM.findDOMNode(
-            ref?.options?.[`child_ref_${option.key}`]
+            ref?.options?.[`child_ref_${option.key}`],
           );
           if ($option?.checked) {
             checked_options += 1;
@@ -171,7 +175,7 @@ class ReactForm extends React.Component {
       const checked_options = [];
       item?.options?.forEach((option) => {
         const $option = ReactDOM.findDOMNode(
-          ref?.options?.[`child_ref_${option?.key}`]
+          ref?.options?.[`child_ref_${option?.key}`],
         );
         if ($option?.checked) {
           checked_options.push(option?.key);
@@ -256,7 +260,7 @@ class ReactForm extends React.Component {
 
       if (this._isInvalid(item)) {
         errors.push(
-          `${item.label} ${intl.formatMessage({ id: "message.is-required" })}!`
+          `${item.label} ${intl.formatMessage({ id: "message.is-required" })}!`,
         );
       }
 
@@ -267,14 +271,14 @@ class ReactForm extends React.Component {
           const validateEmail = (email) =>
             email.match(
               // eslint-disable-next-line no-useless-escape
-              /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+              /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             );
           const checkEmail = validateEmail(emailValue);
           if (!checkEmail) {
             errors.push(
               `${item.label} ${intl.formatMessage({
                 id: "message.invalid-email",
-              })}`
+              })}`,
             );
           }
         }
@@ -284,7 +288,7 @@ class ReactForm extends React.Component {
         errors.push(
           `${item.label} ${intl.formatMessage({
             id: "message.was-answered-incorrectly",
-          })}!`
+          })}!`,
         );
       }
     });
@@ -322,7 +326,7 @@ class ReactForm extends React.Component {
 
   getContainerElement(item, Element) {
     const controls = item.childItems.map((x) =>
-      x ? this.getInputElement(this.getDataById(x)) : <div>&nbsp;</div>
+      x ? this.getInputElement(this.getDataById(x)) : <div>&nbsp;</div>,
     );
     return (
       <Element
@@ -356,7 +360,7 @@ class ReactForm extends React.Component {
         console.error(
           `${item.element} ${intl.formatMessage({
             id: "message.was-not-registered",
-          })}`
+          })}`,
         );
       }
     }
