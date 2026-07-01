@@ -33,7 +33,6 @@ class ReactForm extends React.Component {
     if (Array.isArray(answers)) {
       const result = {};
       answers.forEach((x) => {
-        console.log({ x });
         if (!x || typeof x.name !== "string") {
           return;
         }
