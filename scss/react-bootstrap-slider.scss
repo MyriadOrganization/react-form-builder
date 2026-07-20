@@ -1,3 +1,37 @@
 $slider-horizontal-width: 100%;
 
 @import "../node_modules/bootstrap-slider/src/sass/bootstrap-slider";
+
+.slider {
+  &.slider-horizontal {
+    .slider-track {
+      height: 4px;
+      margin-top: -2px;
+      background: var(--rfb-border);
+      background-image: none;
+      box-shadow: none;
+      border: 0;
+      border-radius: 2px;
+    }
+  }
+  .slider-selection {
+    background: var(--rfb-primary);
+    background-image: none;
+    box-shadow: none;
+    border-radius: 2px;
+  }
+  .slider-handle {
+    width: 18px;
+    height: 18px;
+    background: var(--rfb-surface);
+    background-image: none;
+    border: 2px solid var(--rfb-primary);
+    box-shadow: var(--rfb-shadow-card);
+    &.round {
+      border-radius: 50%;
+    }
+  }
+  .tooltip {
+    font-family: var(--rfb-font);
+  }
+}

@@ -1,36 +1,241 @@
 input[type="date"]:before {
   content: attr(placeholder);
-  color: #aaa;
+  color: var(--rfb-text-muted);
   margin-right: 0.5em;
 }
 
 input[type="date"] {
   width: 200px;
 }
-// input[type="radio"] {
-//   width: 24px !important;
-//   height: 24px !important;
-//   color: white !important;
-//   border: 1px solid #8fa0a7 !important;
-//   border-radius: 100% !important;
-// }
+
+// Rendered outside .react-form-builder-form (see form.jsx), so it is styled
+// standalone — the namespaced bootstrap alert rules never reach it.
 .validation-error {
   position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  max-width: 640px;
   margin: 0;
   z-index: 99999999;
+  background: var(--rfb-danger-bg);
+  border: 1px solid var(--rfb-danger-border);
+  border-radius: var(--rfb-radius-lg);
+  color: var(--rfb-danger-text);
+  padding: 12px 16px;
+  box-shadow: var(--rfb-shadow-pop);
+  font-family: var(--rfb-font);
+  font-size: 14px;
+  i,
+  svg {
+    margin: 2px 8px 0 0;
+    color: var(--rfb-danger);
+  }
   ul {
     width: auto;
+    margin: 0;
+    padding-left: 8px;
+    list-style-position: inside;
   }
   .dismiss-modal-button {
     margin-top: 10px;
   }
+  .btn {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 4px 12px;
+    border: 0;
+    border-radius: var(--rfb-radius-sm);
+    background: var(--rfb-danger);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    &:hover {
+      background: var(--rfb-danger-text);
+      color: #fff;
+    }
+  }
 }
+
+// Shared control skin for both the builder canvas (.react-form-builder) and
+// the rendered form (.react-form-builder-form). Class names are doubled or
+// given an extra ancestor on purpose: the namespaced bootstrap.scss ships on
+// a separate import path (lib/index.js) and its order relative to this file
+// is not guaranteed, so these rules must win on specificity, not on order.
+.react-form-builder,
+.react-form-builder-form {
+  .form-control.form-control {
+    min-height: 40px;
+    padding: 8px 12px;
+    font-family: var(--rfb-font);
+    font-size: 14px;
+    color: var(--rfb-text);
+    background-color: var(--rfb-surface);
+    border: 1px solid var(--rfb-border);
+    border-radius: var(--rfb-radius-md);
+    box-shadow: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    &::placeholder {
+      color: var(--rfb-text-muted);
+    }
+    &:focus {
+      border-color: var(--rfb-focus-border);
+      box-shadow: 0 0 0 2px var(--rfb-focus-ring);
+      outline: 0;
+    }
+    &:disabled,
+    &[readonly] {
+      background-color: var(--rfb-surface-subtle);
+    }
+  }
+  input.form-control.form-control,
+  select.form-control.form-control {
+    height: 40px;
+  }
+  textarea.form-control.form-control {
+    height: auto;
+    min-height: 80px;
+  }
+  select.form-control.form-control {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 36px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E%3Cpath fill='%23717680' d='M4.72 6.47a.75.75 0 0 1 1.06 0L9 9.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-3.75 3.75a.75.75 0 0 1-1.06 0L4.72 7.53a.75.75 0 0 1 0-1.06z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 18px;
+  }
+
+  // Custom checkboxes / radios: modern 18px controls drawn with borders and
+  // background colors (no hardcoded-color SVG marks) so the checked state
+  // follows per-practice theming, including --rfb-on-primary check marks.
+  .custom-control.custom-checkbox,
+  .custom-control.custom-radio {
+    padding-left: 0;
+    margin-bottom: 8px;
+    background: transparent;
+  }
+  .custom-control .custom-control-label {
+    position: relative;
+    padding: 2px 0 2px 26px;
+    cursor: pointer;
+    font-weight: 400;
+    color: var(--rfb-text);
+    &::before {
+      position: absolute;
+      left: 0;
+      top: 2px;
+      width: 18px;
+      height: 18px;
+      background-color: var(--rfb-surface);
+      border: 1px solid var(--rfb-control-border);
+      box-shadow: none;
+      transition: border-color 0.15s ease, background-color 0.15s ease;
+    }
+    &::after {
+      left: 0;
+      top: 2px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+  .custom-checkbox .custom-control-label::before {
+    border-radius: var(--rfb-radius-sm);
+  }
+  .custom-radio .custom-control-label::before {
+    border-radius: 50%;
+  }
+  .custom-control .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: var(--rfb-surface);
+    border-color: var(--rfb-primary);
+  }
+  .custom-control.custom-checkbox
+    .custom-control-input:checked
+    ~ .custom-control-label::before {
+    background-color: var(--rfb-primary);
+  }
+  .custom-control.custom-checkbox
+    .custom-control-input:checked
+    ~ .custom-control-label::after {
+    background-image: none !important;
+    left: 6px;
+    top: 5px;
+    width: 6px;
+    height: 10px;
+    border: solid var(--rfb-on-primary);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .custom-control.custom-radio
+    .custom-control-input:checked
+    ~ .custom-control-label::after {
+    background-image: none !important;
+    left: 4px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--rfb-primary);
+  }
+  .custom-control .custom-control-input:focus ~ .custom-control-label::before {
+    border-color: var(--rfb-focus-border);
+    box-shadow: 0 0 0 2px var(--rfb-focus-ring);
+  }
+  .custom-control
+    .custom-control-input:disabled
+    ~ .custom-control-label::before {
+    background-color: var(--rfb-surface-subtle);
+    border-color: var(--rfb-border);
+  }
+
+  // "Required" badge rendered as a red asterisk (mirrors the app-side skin).
+  .label-required.badge {
+    position: relative;
+    visibility: hidden;
+    margin-left: 2px;
+    padding: 0;
+    background: none;
+    &::after {
+      content: "*";
+      visibility: visible;
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--rfb-danger);
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+
+  .clear-signature {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--rfb-radius-sm);
+    color: var(--rfb-text-muted);
+    cursor: pointer;
+    z-index: 2;
+    &:hover {
+      background: var(--rfb-surface-subtle);
+      color: var(--rfb-text);
+    }
+  }
+}
+
 .react-form-builder-form {
   position: relative;
-  font-family: "Plus Jakarta Sans";
+  font-family: var(--rfb-font);
+  font-size: 14px;
+  color: var(--rfb-text);
   .rfb-item.alwaysbreak {
     page-break-before: always;
   }
@@ -49,8 +254,8 @@ input[type="date"] {
       max-width: 100%;
     }
     label {
-      font-weight: normal;
-      color: #374145;
+      font-weight: 500;
+      color: var(--rfb-text);
     }
 
     .bold {
@@ -70,11 +275,11 @@ input[type="date"] {
       }
 
       a {
-        // color: #13b9ff !important;
+        color: var(--rfb-primary-strong);
         cursor: pointer;
       }
       input[type="date"] {
-        height: 42px;
+        height: 40px;
       }
       .m-signature-pad {
         position: relative;
@@ -91,6 +296,56 @@ input[type="date"] {
       .label-required {
         margin-left: 5px;
       }
+    }
+  }
+
+  .btn.btn-default {
+    background: var(--rfb-surface);
+    border: 1px solid var(--rfb-border);
+    border-radius: var(--rfb-radius-sm);
+    color: var(--rfb-text-secondary);
+    font-family: var(--rfb-font);
+    font-weight: 500;
+    &:hover {
+      background: var(--rfb-surface-subtle);
+      color: var(--rfb-text);
+    }
+  }
+  .btn-toolbar {
+    margin-top: 24px;
+    display: flex;
+    gap: 12px;
+  }
+  .btn.btn-big {
+    height: 48px;
+    padding: 0 24px;
+    border: 0;
+    border-radius: var(--rfb-radius-sm);
+    background: var(--rfb-primary);
+    color: var(--rfb-on-primary);
+    font-family: var(--rfb-font);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease;
+    &:hover {
+      background: var(--rfb-primary-strong);
+      color: var(--rfb-on-primary);
+    }
+    &:focus {
+      box-shadow: 0 0 0 2px var(--rfb-focus-ring);
+      outline: 0;
+    }
+  }
+  .btn.btn-cancel {
+    display: inline-flex;
+    align-items: center;
+    background: var(--rfb-surface);
+    border: 1px solid var(--rfb-border);
+    color: var(--rfb-text-secondary);
+    &:hover {
+      background: var(--rfb-surface-subtle);
+      color: var(--rfb-text);
     }
   }
 }

@@ -427,6 +427,7 @@ class Tags extends React.Component {
     });
     const props = {};
     props.isMulti = true;
+    props.classNamePrefix = "rfb-select";
     props.name = this.props.data.field_name;
     props.onChange = this.handleChange;
 

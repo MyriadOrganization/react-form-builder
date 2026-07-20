@@ -3,3 +3,71 @@
 .react-datepicker-popper {
   z-index: 2000;
 }
+
+.react-datepicker {
+  font-family: var(--rfb-font);
+  border: 1px solid var(--rfb-border);
+  border-radius: var(--rfb-radius-lg);
+  box-shadow: var(--rfb-shadow-pop);
+  color: var(--rfb-text);
+
+  &__header {
+    background-color: var(--rfb-surface);
+    border-bottom: 1px solid var(--rfb-border);
+    border-top-left-radius: var(--rfb-radius-lg);
+    border-top-right-radius: var(--rfb-radius-lg);
+  }
+
+  &__current-month,
+  &-time__header,
+  &-year-header {
+    color: var(--rfb-text);
+    font-weight: 600;
+  }
+
+  &__day-name {
+    color: var(--rfb-text-muted);
+  }
+
+  &__day,
+  &__month-text,
+  &__quarter-text,
+  &__year-text {
+    color: var(--rfb-text);
+    border-radius: var(--rfb-radius-sm);
+    &:hover {
+      background-color: var(--rfb-primary-faint);
+      border-radius: var(--rfb-radius-sm);
+    }
+  }
+
+  &__day--selected,
+  &__day--keyboard-selected,
+  &__month-text--selected,
+  &__quarter-text--selected,
+  &__year-text--selected {
+    background-color: var(--rfb-primary);
+    color: var(--rfb-on-primary);
+    border-radius: var(--rfb-radius-sm);
+    &:hover {
+      background-color: var(--rfb-primary-strong);
+      color: var(--rfb-on-primary);
+    }
+  }
+
+  &__day--today {
+    font-weight: 700;
+    color: var(--rfb-primary-strong);
+    &.react-datepicker__day--selected {
+      color: var(--rfb-on-primary);
+    }
+  }
+
+  &__day--disabled {
+    color: var(--rfb-border-strong);
+  }
+
+  &__triangle {
+    display: none;
+  }
+}
