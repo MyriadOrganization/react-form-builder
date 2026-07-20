@@ -4,14 +4,6 @@ import { findDOMNode } from "react-dom";
 import { DragSource, DropTarget } from "react-dnd";
 import ItemTypes from "./ItemTypes";
 
-const style = {
-  border: "1px dashed gray",
-  padding: "0.5rem 1rem",
-  marginBottom: ".5rem",
-  backgroundColor: "white",
-  cursor: "pointer",
-};
-
 const cardSource = {
   beginDrag(props) {
     return {
@@ -226,7 +218,7 @@ export default function (ComposedComponent) {
           <div>
             <ComposedComponent
               {...this.props}
-              style={{ ...style, opacity }}
+              style={{ opacity }}
             ></ComposedComponent>
           </div>
         )

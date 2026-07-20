@@ -1,5 +1,6 @@
 import React, { useImperativeHandle, Fragment } from "react";
 import { DropTarget } from "react-dnd";
+import classNames from "classnames";
 import FormElements from "../form-elements";
 import ItemTypes from "../ItemTypes";
 
@@ -34,18 +35,6 @@ function getElement(item, props) {
       <Element {...props} key={`form_${item.id}`} data={item} />
     </Fragment>
   );
-}
-
-function getStyle(backgroundColor) {
-  return {
-    border: "1px solid rgba(0,0,0,0.2)",
-    minHeight: "2rem",
-    minWidth: "12rem",
-    width: "100%",
-    backgroundColor,
-    padding: 0,
-    float: "left",
-  };
 }
 
 function isContainer(item) {
@@ -94,23 +83,15 @@ const Dustbin = React.forwardRef(
     const element = getElement(item, rest);
     const sameCard = draggedItem ? draggedItem.index === parentIndex : false;
 
-    // console.log('dragIndex:',draggedItem?.index)
-    // console.log('HoverIndex:',parentIndex)
-    // console.log('SameCard:',sameCard)
+    const isDropTarget =
+      !sameCard && isOver && canDrop && !draggedItem.data.isContainer;
 
-    let backgroundColor = "#fff";
-
-    if (!sameCard && isOver && canDrop && !draggedItem.data.isContainer) {
-      backgroundColor = "#F7F589";
-    }
-
-    // console.log('accepts, canDrop', accepts, canDrop);
     return connectDropTarget(
       <div
-        style={
-          !sameCard ? getStyle(backgroundColor) : getStyle("rgba(0, 0, 0, .03")
-        }
-        className="shared-input"
+        className={classNames("shared-input", "rfb-dustbin", {
+          "is-drop-target": isDropTarget,
+          "is-same-card": sameCard,
+        })}
       >
         {element}
       </div>

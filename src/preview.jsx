@@ -318,7 +318,7 @@ export default class Preview extends React.Component {
         </div>
         <div className="Sortable">{items}</div>
         {items.length === 0 && (
-          <div className="text-center">
+          <div className="text-center rfb-empty-state">
             <p className="startAdd">
               Start adding components to create the form
             </p>

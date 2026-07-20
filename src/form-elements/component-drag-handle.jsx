@@ -3,14 +3,6 @@ import { DragSource } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
 import ItemTypes from "../ItemTypes";
 
-const style = {
-  // display: 'inline-block',
-  // border: '1px dashed gray',
-  // padding: '0.5rem 1rem',
-  // backgroundColor: 'white',
-  cursor: "move",
-};
-
 const dragHandleSource = {
   beginDrag(props) {
     const { data, index, onDestroy, setAsChild, getDataById } = props;
@@ -45,7 +37,7 @@ class DragHandle extends PureComponent {
   render() {
     const { connectDragSource } = this.props;
     return connectDragSource(
-      <div className="btn is-isolated dragSvg" style={style}>
+      <div className="btn is-isolated dragSvg">
         <svg
           width="20"
           height="20"
