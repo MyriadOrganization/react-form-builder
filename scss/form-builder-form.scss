@@ -311,6 +311,56 @@ input[type="date"] {
     }
   }
 
+  // Section headings & instructional text — give Header / Label / Paragraph
+  // elements clear hierarchy and a readable measure so long client-built forms
+  // are easy to scan.
+  .rfb-item h3.header {
+    margin: 8px 0 4px;
+    line-height: 1.25;
+    color: var(--rfb-text);
+  }
+  // A Label element sitting on its own line reads as a section subheading
+  // (distinct from field labels, which live inside .form-group).
+  .rfb-item > label.static {
+    display: block;
+    margin: 8px 0 4px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--rfb-text);
+  }
+  .rfb-item p.static {
+    margin: 4px 0;
+    max-width: 70ch;
+    line-height: 1.55;
+    color: var(--rfb-text-secondary);
+  }
+  .rfb-item hr {
+    border: 0;
+    border-top: 1px solid var(--rfb-border);
+    margin: 24px 0;
+  }
+
+  // Multi-column groups: render each cell as a subtle, equal-height card.
+  // Grid items already stretch to equal height, so the card edges align even
+  // when question labels wrap to different line counts — this replaces the old
+  // full-width gray band and gives clean grouping for matrix-style questions
+  // (GAD-7, ADHD, symptom checklists) and side-by-side fields alike.
+  .two-column,
+  .three-column,
+  .four-column {
+    align-items: stretch;
+    > .shared-input {
+      padding: 16px;
+      background: var(--rfb-surface);
+      border: 1px solid var(--rfb-border);
+      border-radius: var(--rfb-radius-lg);
+      // the card owns the spacing; drop the nested item's own vertical padding
+      > .rfb-item {
+        padding: 0;
+      }
+    }
+  }
+
   .btn.btn-default {
     background: var(--rfb-surface);
     border: 1px solid var(--rfb-border);
