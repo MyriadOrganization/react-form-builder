@@ -74,8 +74,8 @@ input[type="date"] {
     font-size: 14px;
     color: var(--rfb-text);
     background-color: var(--rfb-surface);
-    border: 1px solid var(--rfb-border);
-    border-radius: var(--rfb-radius-md);
+    border: 1px solid var(--rfb-border-strong);
+    border-radius: var(--rfb-radius-lg);
     box-shadow: none;
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
     &::placeholder {
@@ -311,108 +311,69 @@ input[type="date"] {
     }
   }
 
-  // Section headings & instructional text — give Header / Label / Paragraph
-  // elements clear hierarchy and a readable measure so long client-built forms
-  // are easy to scan.
-  .rfb-item h3.header {
-    margin: 8px 0 4px;
-    line-height: 1.25;
+  // Field labels sit above their inputs, compact and quiet — matching the
+  // native form's grid.
+  .rfb-item .form-group > label,
+  .rfb-item .form-group > .form-label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 500;
     color: var(--rfb-text);
   }
-  // A Label element sitting on its own line reads as a section subheading
-  // (distinct from field labels, which live inside .form-group).
+
+  // Section headings & instructional text — clear hierarchy, in line with the
+  // app's native form sections.
+  .rfb-item h3.header {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+    margin: 4px 0 10px;
+    color: var(--rfb-text);
+  }
+  // A Label element on its own line reads as a section subheading (distinct
+  // from field labels, which live inside .form-group).
   .rfb-item > label.static {
     display: block;
-    margin: 8px 0 4px;
-    font-size: 16px;
+    margin: 20px 0 8px;
+    font-size: 15px;
     font-weight: 600;
     color: var(--rfb-text);
   }
   .rfb-item p.static {
-    margin: 4px 0;
-    max-width: 70ch;
+    margin: 4px 0 8px;
+    max-width: 72ch;
     line-height: 1.55;
     color: var(--rfb-text-secondary);
   }
   .rfb-item hr {
     border: 0;
     border-top: 1px solid var(--rfb-border);
-    margin: 24px 0;
+    margin: 20px 0;
   }
 
-  // Multi-column groups: render each cell as a subtle, equal-height card.
-  // Grid items already stretch to equal height, so the card edges align even
-  // when question labels wrap to different line counts — this replaces the old
-  // full-width gray band and gives clean grouping for matrix-style questions
-  // (GAD-7, ADHD, symptom checklists) and side-by-side fields alike.
+  // Multi-column groups: a clean, top-aligned grid with labels above inputs,
+  // matching the native form's field grid — no cards, no boxes.
   .two-column,
   .three-column,
   .four-column {
-    align-items: stretch;
-    gap: 20px;
-    > .shared-input {
-      padding: 20px;
-      background: var(--rfb-surface);
-      border: 1px solid var(--rfb-border);
-      border-radius: var(--rfb-radius-xl);
-      box-shadow: var(--rfb-elevation-2);
-      // the card owns the spacing; drop the nested item's own vertical padding
-      > .rfb-item {
-        padding: 0;
-      }
-    }
+    align-items: start;
+    column-gap: 28px;
+    row-gap: 0;
   }
 
-  // ---- Sleek, elevated patient look --------------------------------------
-  // Selectable answer rows: radios & checkboxes render as tactile rows that
-  // light up in the practice brand colour when chosen — high-feedback and
-  // modern, a big step up from bare radio dots.
+  // Radios & checkboxes stay compact: a small control with its label beside it,
+  // tightly stacked (no oversized bordered rows).
   .custom-control.custom-radio,
   .custom-control.custom-checkbox {
-    margin: 0 0 10px;
-    padding: 11px 14px;
-    border: 1px solid var(--rfb-border);
-    border-radius: 12px;
-    background: var(--rfb-surface);
-    cursor: pointer;
-    transition: border-color 0.15s ease, background-color 0.15s ease,
-      box-shadow 0.15s ease;
-    &:hover {
-      border-color: var(--rfb-primary-soft);
-      background: var(--rfb-primary-faint);
-    }
-    &:has(.custom-control-input:checked) {
-      border-color: var(--rfb-primary);
-      background: var(--rfb-primary-faint);
-      box-shadow: 0 0 0 3px var(--rfb-focus-ring);
-    }
-    &:has(.custom-control-input:focus-visible) {
-      border-color: var(--rfb-primary);
-      box-shadow: 0 0 0 3px var(--rfb-focus-ring);
-    }
-    .custom-control-label {
-      font-weight: 500;
-    }
-  }
-
-  // Inputs: softer radius and a gentle focus glow for depth.
-  .form-control.form-control {
-    border-radius: 10px;
-    &:focus {
-      box-shadow: 0 0 0 3px var(--rfb-focus-ring);
-    }
-  }
-
-  // Form title: tighter, more confident.
-  .rfb-item h3.header {
-    font-weight: 700;
-    letter-spacing: -0.01em;
+    margin-bottom: 10px;
   }
 
   .btn.btn-default {
     background: var(--rfb-surface);
-    border: 1px solid var(--rfb-border);
-    border-radius: var(--rfb-radius-sm);
+    border: 1px solid var(--rfb-border-strong);
+    border-radius: var(--rfb-radius-lg);
     color: var(--rfb-text-secondary);
     font-family: var(--rfb-font);
     font-weight: 500;
@@ -427,27 +388,20 @@ input[type="date"] {
     gap: 12px;
   }
   .btn.btn-big {
-    height: 48px;
-    padding: 0 28px;
+    height: 44px;
+    padding: 0 24px;
     border: 0;
-    border-radius: 10px;
+    border-radius: var(--rfb-radius-lg);
     background: var(--rfb-primary);
     color: var(--rfb-on-primary);
     font-family: var(--rfb-font);
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: var(--rfb-elevation-1);
-    transition: background-color 0.15s ease, box-shadow 0.15s ease,
-      transform 0.15s ease;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease;
     &:hover {
       background: var(--rfb-primary-strong);
       color: var(--rfb-on-primary);
-      box-shadow: var(--rfb-elevation-2);
-      transform: translateY(-1px);
-    }
-    &:active {
-      transform: translateY(0);
     }
     &:focus {
       box-shadow: 0 0 0 3px var(--rfb-focus-ring);
