@@ -5,6 +5,7 @@
  import React from 'react';
  import ID from './UUID';
  import IntlMessages from './language-provider/IntlMessages';
+ import Icon from './Icons/Icon';
 
  export default class DynamicOptionList extends React.Component {
    constructor(props) {
@@ -111,9 +112,9 @@
                      </div> }
                      <div className="col-sm-3">
                        <div className="dynamic-options-actions-buttons">
-                         <button onClick={this.addOption.bind(this, index)} className="btn btn-success"><i className="fas fa-plus-circle"></i></button>
+                         <button onClick={this.addOption.bind(this, index)} className="btn btn-success"><Icon icon="plus-circle" /></button>
                          { index > 0
-                           && <button onClick={this.removeOption.bind(this, index)} className="btn btn-danger"><i className="fas fa-minus-circle"></i></button>
+                           && <button onClick={this.removeOption.bind(this, index)} className="btn btn-danger"><Icon icon="minus-circle" /></button>
                          }
                        </div>
                      </div>

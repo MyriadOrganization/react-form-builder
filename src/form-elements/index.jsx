@@ -9,6 +9,7 @@ import TextareaAutosize from "react-textarea-autosize";
 
 import ComponentHeader from "./component-header";
 import ComponentLabel from "./component-label";
+import Icon from "../Icons/Icon";
 import DatePicker from "./date-picker";
 import myxss from "./myxss";
 import StarRating from "./star-rating";
@@ -382,11 +383,13 @@ class Signature extends React.Component {
             <SignaturePad {...pad_props} />
           )}
           {canClear && (
-            <i
-              className="fas fa-times clear-signature"
+            <span
+              className="clear-signature"
               onClick={this.clear}
               title="Clear Signature"
-            ></i>
+            >
+              <Icon icon="close" />
+            </span>
           )}
           <input {...props} />
         </div>
@@ -795,7 +798,7 @@ class Camera extends React.Component {
                 />
                 <div className="image-upload-control">
                   <div className="btn btn-default">
-                    <i className="fas fa-camera"></i> Upload Photo
+                    <Icon icon="camera" /> Upload Photo
                   </div>
                   <p>Select an image from your computer or device.</p>
                 </div>
@@ -813,7 +816,7 @@ class Camera extends React.Component {
                     className="btn btn-image-clear"
                     onClick={this.clearImage}
                   >
-                    <i className="fas fa-times"></i> Clear Photo
+                    <Icon icon="close" /> Clear Photo
                   </div>
                 </div>
               )}
@@ -894,7 +897,7 @@ class FileUpload extends React.Component {
           this.props.defaultValue.length > 0 ? (
             <div>
               <button className="btn btn-default" onClick={this.saveFile}>
-                <i className="fas fa-download"></i> Download File
+                <Icon icon="download" /> Download File
               </button>
             </div>
           ) : (
@@ -909,7 +912,7 @@ class FileUpload extends React.Component {
                 />
                 <div className="image-upload-control">
                   <div className="btn btn-default">
-                    <i className="fas fa-file"></i> Upload File
+                    <Icon icon="file-attach" /> Upload File
                   </div>
                   <p>Select a file from your computer or device.</p>
                 </div>
@@ -938,7 +941,7 @@ class FileUpload extends React.Component {
                     className="btn btn-file-upload-clear"
                     onClick={this.clearFileUpload}
                   >
-                    <i className="fas fa-times"></i> Clear File
+                    <Icon icon="close" /> Clear File
                   </div>
                 </div>
               )}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { DragSource } from 'react-dnd';
 import ItemTypes from '../ItemTypes';
+import Icon from '../Icons/Icon';
 
 const gripSource = {
   beginDrag(props) {
@@ -22,7 +23,7 @@ const gripSource = {
 };
 
 const Grip = ({ connectDragSource }) => connectDragSource(
-  <div className="btn is-isolated"><i className="is-isolated fas fa-grip-vertical"></i></div>,
+  <div className="btn is-isolated dragSvg"><Icon icon="drag-dots" /></div>,
 );
 
 export default DragSource(
