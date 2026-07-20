@@ -39,8 +39,15 @@
   --rfb-radius-sm: 4px; // buttons
   --rfb-radius-md: 6px; // inputs
   --rfb-radius-lg: 8px; // cards
+  --rfb-radius-xl: 14px; // elevated question cards
   --rfb-shadow-card: 0 4px 16px rgba(10, 18, 57, 0.03);
   --rfb-shadow-pop: 0 0 24px rgba(0, 79, 107, 0.16);
+  // Layered elevation for depth (rendered patient forms)
+  --rfb-elevation-1: 0 1px 2px rgba(16, 24, 40, 0.06);
+  --rfb-elevation-2: 0 1px 2px rgba(16, 24, 40, 0.06),
+    0 10px 24px rgba(0, 79, 107, 0.07);
+  --rfb-elevation-3: 0 2px 4px rgba(16, 24, 40, 0.06),
+    0 18px 40px rgba(0, 79, 107, 0.13);
 
   // Type
   --rfb-font: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont,
