@@ -103,7 +103,7 @@
     "build": "webpack --mode production --config webpack.production.config.js",
     "build:dev": "webpack --mode development",
     "build:umd": "webpack --mode development --config webpack.production.config.js",
-    "build:style": "node-sass ./scss/application.scss dist/app.css --output-style compressed",
+    "build:style": "sass ./scss/application.scss dist/app.css --load-path=node_modules --style compressed --no-source-map",
     "build:lib": "npm run transpile && npm run build:style",
     "build:dist": "npm run build && npm run copy:dist",
     "clean": "rimraf dist",
