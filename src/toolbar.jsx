@@ -430,6 +430,14 @@ class Toolbar extends React.Component {
       elementOptions.defaultValue = item.defaultValue;
     }
 
+    if (item.rows !== undefined) {
+      elementOptions.rows = item.rows;
+    }
+
+    if (item.columns !== undefined) {
+      elementOptions.columns = item.columns;
+    }
+
     if (item.field_name) {
       elementOptions.field_name = item.field_name + ID.uuid();
     }

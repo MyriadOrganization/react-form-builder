@@ -57,6 +57,25 @@ export default class FormElementsEdit extends React.Component {
     );
   }
 
+  editArrayProp(elemProperty, index, e) {
+    const this_element = this.state.element;
+    const list = Array.isArray(this_element[elemProperty])
+      ? [...this_element[elemProperty]]
+      : [];
+    for (let i = 0; i < index; i += 1) {
+      if (list[i] === undefined) {
+        list[i] = "";
+      }
+    }
+    list[index] = e.target.value;
+    this_element[elemProperty] = list;
+
+    this.setState({
+      element: this_element,
+      dirty: true,
+    });
+  }
+
   onEditorStateChange(index, property, editorContent) {
     const html = draftToHtml(convertToRaw(editorContent.getCurrentContent()))
       .replace(/<p><\/p>/g, "<div>&zwnj;</div>")
@@ -166,6 +185,15 @@ export default class FormElementsEdit extends React.Component {
     )
       ? this.props.element.alternateForm
       : false;
+
+    const this_table_columns = Math.min(
+      Math.max(parseInt(this.props.element.columns, 10) || 0, 0),
+      12
+    );
+    const this_table_rows = Math.min(
+      Math.max(parseInt(this.props.element.rows, 10) || 0, 0),
+      50
+    );
 
     const {
       canHavePageBreakBefore,
@@ -443,6 +471,85 @@ export default class FormElementsEdit extends React.Component {
             </div>
           </div>
         )}
+        {this.props.element.hasOwnProperty("rows") &&
+          this.props.element.hasOwnProperty("columns") && (
+            <div>
+              <div className="row">
+                <div className="col-sm-3">
+                  <label className="control-label" htmlFor="tableRows">
+                    <IntlMessages id="rows" />:
+                  </label>
+                  <input
+                    id="tableRows"
+                    type="number"
+                    min="1"
+                    className="form-control"
+                    defaultValue={this.props.element.rows}
+                    onBlur={this.updateElement.bind(this)}
+                    onChange={this.editElementProp.bind(this, "rows", "value")}
+                  />
+                </div>
+                <div className="col-sm-3">
+                  <label className="control-label" htmlFor="tableColumns">
+                    <IntlMessages id="columns" />:
+                  </label>
+                  <input
+                    id="tableColumns"
+                    type="number"
+                    min="1"
+                    className="form-control"
+                    defaultValue={this.props.element.columns}
+                    onBlur={this.updateElement.bind(this)}
+                    onChange={this.editElementProp.bind(
+                      this,
+                      "columns",
+                      "value"
+                    )}
+                  />
+                </div>
+              </div>
+              {this_table_columns > 0 && (
+                <div className="form-group">
+                  <label className="control-label">
+                    <IntlMessages id="column-headers" />:
+                  </label>
+                  {Array.from({ length: this_table_columns }, (_, i) => (
+                    <input
+                      type="text"
+                      key={`column_header_${i}`}
+                      className="form-control"
+                      style={{ marginBottom: 8 }}
+                      defaultValue={this.props.element.column_headers?.[i]}
+                      onBlur={this.updateElement.bind(this)}
+                      onChange={this.editArrayProp.bind(
+                        this,
+                        "column_headers",
+                        i
+                      )}
+                    />
+                  ))}
+                </div>
+              )}
+              {this_table_rows > 0 && (
+                <div className="form-group">
+                  <label className="control-label">
+                    <IntlMessages id="row-labels" />:
+                  </label>
+                  {Array.from({ length: this_table_rows }, (_, i) => (
+                    <input
+                      type="text"
+                      key={`row_label_${i}`}
+                      className="form-control"
+                      style={{ marginBottom: 8 }}
+                      defaultValue={this.props.element.row_labels?.[i]}
+                      onBlur={this.updateElement.bind(this)}
+                      onChange={this.editArrayProp.bind(this, "row_labels", i)}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
         {canHaveImageSize && (
           <div>
             <div className="form-group">
