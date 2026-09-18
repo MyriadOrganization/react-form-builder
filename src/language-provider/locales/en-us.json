@@ -88,6 +88,7 @@
   "difficult": "Difficult",
   "drop-zone": "DROP COMPONENTS HERE",
 
+  "message.validation-title": "Please complete the required fields",
   "message.is-required": "is required",
   "message.was-answered-incorrectly": "was answered incorrectly",
   "message.was-not-registered": "was not registered",

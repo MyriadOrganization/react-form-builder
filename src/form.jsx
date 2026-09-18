@@ -15,6 +15,21 @@ import Registry from "./stores/registry";
 const { Image, Checkboxes, Signature, Download, Camera, FileUpload } =
   FormElements;
 
+const MAX_ERROR_LABEL_LENGTH = 60;
+
+const errorLabel = (label = "") => {
+  const text = String(label)
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  return text.length > MAX_ERROR_LABEL_LENGTH
+    ? `${text.slice(0, MAX_ERROR_LABEL_LENGTH).trimEnd()}\u2026`
+    : text;
+};
+
 class ReactForm extends React.Component {
   form;
 
@@ -259,7 +274,7 @@ class ReactForm extends React.Component {
 
       if (this._isInvalid(item)) {
         errors.push(
-          `${item.label} ${intl.formatMessage({ id: "message.is-required" })}!`,
+          `${errorLabel(item.label)} ${intl.formatMessage({ id: "message.is-required" })}!`,
         );
       }
 
@@ -275,7 +290,7 @@ class ReactForm extends React.Component {
           const checkEmail = validateEmail(emailValue);
           if (!checkEmail) {
             errors.push(
-              `${item.label} ${intl.formatMessage({
+              `${errorLabel(item.label)} ${intl.formatMessage({
                 id: "message.invalid-email",
               })}`,
             );
@@ -285,7 +300,7 @@ class ReactForm extends React.Component {
 
       if (this.props.validateForCorrectness && this._isIncorrect(item)) {
         errors.push(
-          `${item.label} ${intl.formatMessage({
+          `${errorLabel(item.label)} ${intl.formatMessage({
             id: "message.was-answered-incorrectly",
           })}!`,
         );
