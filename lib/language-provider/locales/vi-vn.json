@@ -80,6 +80,7 @@
 
   "drop-zone": "Khu vực kéo thả",
 
+  "message.validation-title": "Vui lòng hoàn thành các trường bắt buộc",
   "message.is-required": "không được bỏ trống",
   "message.was-answered incorrectly": "đã trả lời sai",
   "message.was-not-registered": "chưa đăng ký"
