@@ -17,13 +17,18 @@ const { Image, Checkboxes, Signature, Download, Camera, FileUpload } =
 
 const MAX_ERROR_LABEL_LENGTH = 60;
 
-const errorLabel = (label = "") => {
-  const text = String(label)
-    .replace(/<[^>]*>/g, " ")
-    .replace(/&nbsp;/gi, " ")
-    .replace(/&amp;/gi, "&")
+const cleanErrorText = (value) =>
+  String(value)
+    .replace(/[\u200B-\u200D\uFEFF]/g, "")
     .replace(/\s+/g, " ")
     .trim();
+
+const errorLabel = (label = "") => {
+  const { body } = new DOMParser().parseFromString(String(label), "text/html");
+  const text =
+    Array.from(body.childNodes)
+      .map((node) => cleanErrorText(node.textContent))
+      .find(Boolean) || cleanErrorText(body.textContent);
 
   return text.length > MAX_ERROR_LABEL_LENGTH
     ? `${text.slice(0, MAX_ERROR_LABEL_LENGTH).trimEnd()}\u2026`
