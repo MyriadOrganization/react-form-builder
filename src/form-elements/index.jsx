@@ -308,6 +308,7 @@ class Dropdown extends React.Component {
         <div className="form-group">
           <ComponentLabel {...this.props} />
           <select {...props}>
+            <option value="">Select…</option>
             {this.props.data.options.map((option) => {
               const this_key = `preview_${option.key}`;
               return (
@@ -709,10 +710,19 @@ class Download extends React.Component {
   }
 }
 
+// Saved Camera answers are PNG base64 with the data-URL prefix stripped (see
+// _getItemValue in form.jsx); other image types keep their full data URL.
+const toImageSrc = (value) => {
+  if (typeof value !== "string" || value.length === 0) return null;
+  return /^(data:|https?:)/i.test(value)
+    ? value
+    : `data:image/png;base64,${value}`;
+};
+
 class Camera extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { img: null };
+    this.state = { img: toImageSrc(props.defaultValue) };
   }
 
   displayImage = (e) => {
@@ -752,18 +762,7 @@ class Camera extends React.Component {
     if (this.props.data.pageBreakBefore) {
       baseClasses += " alwaysbreak";
     }
-    let sourceDataURL;
-    if (
-      this.props.read_only === true &&
-      this.props.defaultValue &&
-      this.props.defaultValue.length > 0
-    ) {
-      if (this.props.defaultValue.indexOf(name > -1)) {
-        sourceDataURL = this.props.defaultValue;
-      } else {
-        sourceDataURL = `data:image/png;base64,${this.props.defaultValue}`;
-      }
-    }
+    const sourceDataURL = toImageSrc(this.props.defaultValue);
 
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
