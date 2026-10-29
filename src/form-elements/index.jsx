@@ -309,14 +309,17 @@ class Dropdown extends React.Component {
           <ComponentLabel {...this.props} />
           <select {...props}>
             <option value="">Select…</option>
-            {this.props.data.options.map((option) => {
-              const this_key = `preview_${option.key}`;
-              return (
-                <option value={option.value} key={this_key}>
-                  {option.text}
-                </option>
-              );
-            })}
+            {/* Skip blank options: older forms added their own as a placeholder. */}
+            {this.props.data.options
+              .filter((option) => option.value !== "" || option.text)
+              .map((option) => {
+                const this_key = `preview_${option.key}`;
+                return (
+                  <option value={option.value} key={this_key}>
+                    {option.text}
+                  </option>
+                );
+              })}
           </select>
         </div>
       </div>
