@@ -21,6 +21,7 @@
   "display-horizontal": "Display horizontal",
   "variable-key": "Variable Key",
   "variable-key-desc": "This will give the element a key that can be used to replace the content with a runtime value",
+  "fill-from-patient-record": "Fill from patient record",
   "print-options": "Print options",
   "page-break-before-elements": "Page Break Before Element",
   "alternate-signature-page": "Alternate/Signature Page",

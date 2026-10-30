@@ -13,6 +13,28 @@ import DynamicOptionList from "./dynamic-option-list";
 import IntlMessages from "./language-provider/IntlMessages";
 import Icon from "./Icons/Icon";
 
+const PATIENT_RECORD_ELEMENTS = [
+  "TextInput",
+  "EmailInput",
+  "NumberInput",
+  "DatePicker",
+  "Dropdown",
+];
+
+const PATIENT_RECORD_FIELDS = [
+  { key: "patient.first_name", label: "First name" },
+  { key: "patient.last_name", label: "Last name" },
+  { key: "patient.full_name", label: "Full name" },
+  { key: "patient.dob", label: "Date of birth" },
+  { key: "patient.sex", label: "Sex" },
+  { key: "patient.email", label: "Email" },
+  { key: "patient.phone", label: "Phone" },
+  { key: "patient.street_address", label: "Street address" },
+  { key: "patient.city", label: "City" },
+  { key: "patient.state", label: "State" },
+  { key: "patient.zip", label: "ZIP" },
+];
+
 const toolbar = {
   options: ["inline", "list", "textAlign", "fontSize", "link", "history"],
   inline: {
@@ -643,6 +665,28 @@ export default class FormElementsEdit extends React.Component {
           </div>
         ) : (
           <div />
+        )}
+
+        {PATIENT_RECORD_ELEMENTS.includes(this.state.element.element) && (
+          <div className="form-group">
+            <label className="control-label" htmlFor="patientRecordField">
+              <IntlMessages id="fill-from-patient-record" />:
+            </label>
+            <select
+              id="patientRecordField"
+              className="form-control"
+              defaultValue={this.props.element.variableKey || ""}
+              onBlur={this.updateElement.bind(this)}
+              onChange={this.editElementProp.bind(this, "variableKey", "value")}
+            >
+              <option value="">None</option>
+              {PATIENT_RECORD_FIELDS.map(({ key, label }) => (
+                <option value={key} key={key}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </div>
         )}
 
         {canHavePageBreakBefore && (

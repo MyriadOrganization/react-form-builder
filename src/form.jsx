@@ -442,7 +442,7 @@ class ReactForm extends React.Component {
         item &&
         item.readOnly &&
         item.variableKey &&
-        this.props.variables[item.variableKey]
+        this.props.variables?.[item.variableKey]
       ) {
         this.answerData[item.field_name] =
           this.props.variables[item.variableKey];
