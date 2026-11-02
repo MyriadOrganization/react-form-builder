@@ -741,16 +741,31 @@ class Camera extends React.Component {
       reader.readAsDataURL(file);
 
       reader.onloadend = () => {
-        self.setState({
-          img: reader.result,
-        });
+        self.setState(
+          {
+            img: reader.result,
+          },
+          self.notifyChange
+        );
       };
     }
   };
 
   clearImage = () => {
-    this.setState({
-      img: null,
+    this.setState(
+      {
+        img: null,
+      },
+      this.notifyChange
+    );
+  };
+
+  // The photo lives in state, not in an input, so the form's onChange never sees it unless we
+  // report it once the FileReader result (or the clear) has landed.
+  notifyChange = () => {
+    if (!this.props.handleChange) return;
+    this.props.handleChange({
+      target: { name: this.props.data.field_name, value: this.state.img || "" },
     });
   };
 

@@ -527,6 +527,7 @@ class ReactForm extends React.Component {
                 key={`form_${item.id}`}
                 data={item}
                 defaultValue={this._getDefaultValue(item)}
+                handleChange={this.handleChange}
               />
             );
           case "FileUpload":
