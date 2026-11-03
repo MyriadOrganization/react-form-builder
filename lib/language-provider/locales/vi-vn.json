@@ -19,6 +19,7 @@
   "display-horizontal": "Hiển thị theo chiều ngang",
   "variable-key": "Khóa tham chiếu",
   "variable-key-desc": "Tùy chọn này cung cấp từ khóa dùng để thay thế nội dung khi biểu mẫu hoạt động",
+  "fill-from-patient-record": "Điền từ hồ sơ bệnh nhân",
   "print-options": "Tùy chọn in ấn",
   "page-break-before-elements": "Phân trang trước thành phần điểu khiển",
   "alternate-signature-page": "Trang thay thế / ký",
