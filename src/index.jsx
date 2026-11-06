@@ -11,6 +11,7 @@ import Toolbar from "./toolbar";
 import FormGenerator from "./form";
 import store from "./stores/store";
 import Registry from "./stores/registry";
+import { setFileHandlers } from "./file-handlers";
 import AppLocale from "./language-provider";
 import "./bootstrap.scss";
 
@@ -124,6 +125,7 @@ FormBuilders.ReactFormBuilder = ReactFormBuilder;
 FormBuilders.ReactFormGenerator = ReactFormGenerator;
 FormBuilders.ElementStore = store;
 FormBuilders.Registry = Registry;
+FormBuilders.setFileHandlers = setFileHandlers;
 
 export default FormBuilders;
 
@@ -132,4 +134,5 @@ export {
   ReactFormGenerator,
   store as ElementStore,
   Registry,
+  setFileHandlers,
 };

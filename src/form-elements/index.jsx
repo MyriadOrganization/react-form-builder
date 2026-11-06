@@ -13,6 +13,7 @@ import Icon from "../Icons/Icon";
 import DatePicker from "./date-picker";
 import myxss from "./myxss";
 import StarRating from "./star-rating";
+import { getFileHandlers } from "../file-handlers";
 
 const FormElements = {};
 
@@ -845,30 +846,74 @@ class Camera extends React.Component {
   }
 }
 
+const isStoredFile = (value) =>
+  !!value && typeof value === "object" && typeof value.handle === "string";
+
+const fileSizeLabel = (size) =>
+  size > 1024 * 1024
+    ? `${Math.ceil(size / (1024 * 1024))} mb`
+    : `${Math.ceil(size / 1024)} kb`;
+
 class FileUpload extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { fileUpload: null };
+    this.state = {
+      fileUpload: isStoredFile(props.defaultValue) ? props.defaultValue : null,
+      uploading: false,
+      error: null,
+    };
   }
 
-  displayFileUpload = (e) => {
-    const self = this;
+  componentWillUnmount() {
+    this.unmounted = true;
+  }
+
+  notifyChange = () => {
+    if (this.props.handleChange) {
+      this.props.handleChange({ target: { name: this.props.data.field_name } });
+    }
+  };
+
+  displayFileUpload = async (e) => {
     const { target } = e;
-    let file;
+    const file = target.files && target.files[0];
+    target.value = "";
+    if (!file) return;
 
-    if (target.files && target.files.length > 0) {
-      file = target.files[0];
+    const { upload } = getFileHandlers();
+    if (!upload) {
+      this.setState({ fileUpload: file, error: null });
+      return;
+    }
 
-      self.setState({
-        fileUpload: file,
+    this.setState({ fileUpload: null, uploading: true, error: null });
+    try {
+      const stored = await upload(file);
+      if (!stored || !stored.handle) throw new Error("No handle");
+      if (this.unmounted) return;
+      this.setState(
+        {
+          uploading: false,
+          fileUpload: {
+            handle: stored.handle,
+            name: stored.filename || file.name,
+            mimetype: stored.mimetype || file.type,
+            size: stored.size || file.size,
+          },
+        },
+        this.notifyChange,
+      );
+    } catch (error) {
+      if (this.unmounted) return;
+      this.setState({
+        uploading: false,
+        error: "Couldn't upload the file. Please try again.",
       });
     }
   };
 
   clearFileUpload = () => {
-    this.setState({
-      fileUpload: null,
-    });
+    this.setState({ fileUpload: null, error: null }, this.notifyChange);
   };
 
   saveFile = async (e) => {
@@ -897,73 +942,107 @@ class FileUpload extends React.Component {
     }
   };
 
+  renderFileLink(file) {
+    const { fileUrl } = getFileHandlers();
+    const href = isStoredFile(file) && fileUrl ? fileUrl(file) : null;
+    if (!href) return null;
+    return (
+      <a
+        className="btn btn-default"
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Icon icon="download" /> Open file
+      </a>
+    );
+  }
+
   render() {
     let baseClasses = "SortableItem rfb-item";
     const name = this.props.data.field_name;
-    const fileInputStyle = this.state.fileUpload ? { display: "none" } : null;
+    const { fileUpload, uploading, error } = this.state;
+    const hideInput = fileUpload || uploading;
+    const fileInputStyle = hideInput ? { display: "none" } : null;
     if (this.props.data.pageBreakBefore) {
       baseClasses += " alwaysbreak";
     }
+    const isLegacyUrl =
+      typeof this.props.defaultValue === "string" &&
+      this.props.defaultValue.length > 0;
+
+    let body;
+    if (this.props.read_only === true && isLegacyUrl) {
+      body = (
+        <div>
+          <button className="btn btn-default" onClick={this.saveFile}>
+            <Icon icon="download" /> Download File
+          </button>
+        </div>
+      );
+    } else if (this.props.read_only === true) {
+      body = isStoredFile(fileUpload) ? (
+        <div className="file-upload-preview">
+          <div style={{ marginBottom: "5px" }}>{`Name: ${fileUpload.name}`}</div>
+          {this.renderFileLink(fileUpload)}
+        </div>
+      ) : (
+        <p>No file uploaded.</p>
+      );
+    } else {
+      body = (
+        <div className="image-upload-container">
+          <div style={fileInputStyle}>
+            <input
+              name={name}
+              type="file"
+              accept={this.props.data.fileType || "*"}
+              className="image-upload"
+              onChange={this.displayFileUpload}
+            />
+            <div className="image-upload-control">
+              <div className="btn btn-default">
+                <Icon icon="file-attach" /> Upload File
+              </div>
+              <p>Select a file from your computer or device.</p>
+            </div>
+          </div>
+
+          {uploading && <p className="file-upload-status">Uploading...</p>}
+          {error && <p className="file-upload-error">{error}</p>}
+
+          {fileUpload && (
+            <div>
+              <div className="file-upload-preview">
+                <div style={{ display: "inline-block", marginRight: "5px" }}>
+                  {`Name: ${fileUpload.name}`}
+                </div>
+                {fileUpload.size > 0 && (
+                  <div style={{ display: "inline-block", marginLeft: "5px" }}>
+                    {`Size:  ${fileSizeLabel(fileUpload.size)}`}
+                  </div>
+                )}
+              </div>
+              <br />
+              {this.renderFileLink(fileUpload)}
+              <div
+                className="btn btn-file-upload-clear"
+                onClick={this.clearFileUpload}
+              >
+                <Icon icon="close" /> Clear File
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
         <div className="form-group">
           <ComponentLabel {...this.props} />
-          {this.props.read_only === true &&
-          this.props.defaultValue &&
-          this.props.defaultValue.length > 0 ? (
-            <div>
-              <button className="btn btn-default" onClick={this.saveFile}>
-                <Icon icon="download" /> Download File
-              </button>
-            </div>
-          ) : (
-            <div className="image-upload-container">
-              <div style={fileInputStyle}>
-                <input
-                  name={name}
-                  type="file"
-                  accept={this.props.data.fileType || "*"}
-                  className="image-upload"
-                  onChange={this.displayFileUpload}
-                />
-                <div className="image-upload-control">
-                  <div className="btn btn-default">
-                    <Icon icon="file-attach" /> Upload File
-                  </div>
-                  <p>Select a file from your computer or device.</p>
-                </div>
-              </div>
-
-              {this.state.fileUpload && (
-                <div>
-                  <div className="file-upload-preview">
-                    <div
-                      style={{ display: "inline-block", marginRight: "5px" }}
-                    >
-                      {`Name: ${this.state.fileUpload.name}`}
-                    </div>
-                    <div style={{ display: "inline-block", marginLeft: "5px" }}>
-                      {this.state.fileUpload.size.length > 6
-                        ? `Size:  ${Math.ceil(
-                            this.state.fileUpload.size / (1024 * 1024),
-                          )} mb`
-                        : `Size:  ${Math.ceil(
-                            this.state.fileUpload.size / 1024,
-                          )} kb`}
-                    </div>
-                  </div>
-                  <br />
-                  <div
-                    className="btn btn-file-upload-clear"
-                    onClick={this.clearFileUpload}
-                  >
-                    <Icon icon="close" /> Clear File
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
+          {body}
         </div>
       </div>
     );

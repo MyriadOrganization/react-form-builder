@@ -173,6 +173,8 @@ class ReactForm extends React.Component {
           if ($item.value === 0) {
             invalid = true;
           }
+        } else if (item.element === "FileUpload") {
+          invalid = !$item.value;
         } else if ($item.value === undefined || $item.value?.length < 1) {
           invalid = true;
         }
@@ -236,11 +238,22 @@ class ReactForm extends React.Component {
     }
   }
 
+  _hasPendingUploads() {
+    return Object.values(this.inputs).some(
+      (ref) => ref instanceof FileUpload && ref.state.uploading,
+    );
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     let errors = [];
     if (!this.props.skip_validations) {
       errors = this.validateForm();
+    }
+    if (this._hasPendingUploads()) {
+      errors.push("Please wait for the files to finish uploading.");
+    }
+    if (!this.props.skip_validations || errors.length > 0) {
       // Publish errors, if any.
       this.emitter.emit("formValidation", errors);
     }
@@ -539,6 +552,7 @@ class ReactForm extends React.Component {
                 key={`form_${item.id}`}
                 data={item}
                 defaultValue={this._getDefaultValue(item)}
+                handleChange={this.handleChange}
               />
             );
           default:
