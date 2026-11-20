@@ -907,7 +907,9 @@ class FileUpload extends React.Component {
       if (this.unmounted) return;
       this.setState({
         uploading: false,
-        error: "Couldn't upload the file. Please try again.",
+        error:
+          (error && error.userMessage) ||
+          "Couldn't upload the file. Please try again.",
       });
     }
   };
